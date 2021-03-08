@@ -1,9 +1,15 @@
 package java.model;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student extends Person {
+@Named(value = "studentController")
+@SessionScoped
+
+public class Student extends Person implements Serializable {
     private Long IdStudent;
     private int year;
     private Materials listOfMaterials;
@@ -16,6 +22,10 @@ public class Student extends Person {
         this.year = year;
         this.adress = adress;
         this.IdStudent = super.getIdPerson();
+    }
+
+    public Student() {
+        super();
     }
 
     public int getYear() {

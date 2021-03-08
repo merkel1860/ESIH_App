@@ -1,8 +1,9 @@
 package java.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Person {
+public class Person implements Serializable {
     private static List<Long> personEffective;
     private static final int permittedStudentRange = 1000;
     private String fname;
@@ -15,6 +16,9 @@ public class Person {
         this.lname = lname;
         this.gender = gender;
         idPerson = pseudoRandomGenerator();
+    }
+
+    public Person() {
     }
 
     private long pseudoRandomGenerator() {

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ESIH_App:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ESIH_App_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ESIH_App/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ESIH_App" />
+        </element>
+        <element id="directory" name="lib" />
+      </element>
+    </root>
+  </artifact>
+</component>
