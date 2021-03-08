@@ -1,7 +1,9 @@
 package java.model;
 
 
-public class Address  {
+import java.io.Serializable;
+
+public class Address  implements Serializable {
     String email;
 
     public Address(String email) {

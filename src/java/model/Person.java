@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Person implements Serializable {
+    // the number of student
     private static List<Long> personEffective;
+    // maximum of managed students
     private static final int permittedStudentRange = 1000;
+
     private String fname;
     private String lname;
     private String gender;

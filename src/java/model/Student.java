@@ -13,14 +13,14 @@ public class Student extends Person implements Serializable {
     private Long IdStudent;
     private int year;
     private Materials listOfMaterials;
-    private Address studentAdress;
-    public Address adress;
+    private Address address;
     private List<Materials> materials = new ArrayList<Materials>();
+    Person aPerson;
 
     public Student(String fname, String lname, String gender, int year, Address adress) {
         super(fname, lname, gender);
         this.year = year;
-        this.adress = adress;
+        this.address = adress;
         this.IdStudent = super.getIdPerson();
     }
 
@@ -34,6 +34,22 @@ public class Student extends Person implements Serializable {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public Person getaPerson() {
+        return aPerson;
+    }
+
+    public void setaPerson(Person aPerson) {
+        this.aPerson = aPerson;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
