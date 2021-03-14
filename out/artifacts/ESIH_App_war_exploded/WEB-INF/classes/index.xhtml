@@ -6,23 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
    <f:view>
-      <h:form id="enrollForm">
-         <h:panelGrid id="panelStudentInfo" columns="2">
-         <h:outputLabel id="fnameLabel" value="Firstname" />
-         <h:inputText id="firstname"
-                      value="#{studentController.aPerson.fname}" />
-         <h:outputLabel id="lnameLabel" value="Lastname" />
-         <h:inputText id="lastname"
-                      value="#{studentController.aPerson.lname}" />
-         <h:outputLabel id="genderLabel" value="Gender" />
-         <h:inputText id="gender"
-                      value="#{studentController.aPerson.gender}" />
-            <h:outputLabel id="emailLabel" value="Email" />
-            <h:inputText id="email"
-                         value="#{studentController.address.email}" />
-         </h:panelGrid>
-         <h:commandButton value="Add" action="login" />
-      </h:form>
       <h:outputLabel value="Hello, Nebel"/>
    </f:view>
 </html>
