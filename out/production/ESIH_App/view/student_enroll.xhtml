@@ -7,21 +7,27 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <h:form id="enrollForm">
+        <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
         <h:panelGrid id="panelStudentInfo" columns="2">
             <h:outputLabel id="fnameLabel" value="Firstname" />
             <h:inputText id="firstname"
-                         value="#{studentController.aPerson.fname}" />
+                         value="#{enrollController.first_name}" />
             <h:outputLabel id="lnameLabel" value="Lastname" />
             <h:inputText id="lastname"
-                         value="#{studentController.aPerson.lname}" />
+                         value="#{enrollController.last_name}" />
             <h:outputLabel id="genderLabel" value="Gender" />
             <h:inputText id="gender"
-                         value="#{studentController.aPerson.gender}" />
+                         value="#{enrollController.gender}" />
             <h:outputLabel id="emailLabel" value="Email" />
             <h:inputText id="email"
-                         value="#{studentController.address.email}" />
+                         value="#{enrollController.email}" />
+            <h:outputLabel id="promoLabel" value="Promotion" />
+            <h:inputText id="promo"
+                         value="#{enrollController.promotion}" />
+            <br />
         </h:panelGrid>
-        <h:commandButton value="Add" action="" />
+        <h:commandButton value="Add" action="#{enrollController.addAStudent}" />
+        <h:commandButton value="Cancel"  action="#{enrollController.cancelEntry}" />
     </h:form>
 </f:view>
 </html>

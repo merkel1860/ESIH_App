@@ -1,4 +1,4 @@
-package java.model;
+package core;
 
 public class Course {
     private int title;

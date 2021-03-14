@@ -1,11 +1,12 @@
-package java.model;
+package core;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Serializable {
+
+public class Person {
     // the number of student
-    private static List<Long> personEffective;
+    private static List<Long> personEffective = new ArrayList<>();
     // maximum of managed students
     private static final int permittedStudentRange = 1000;
 
@@ -67,6 +68,10 @@ public class Person implements Serializable {
                 "fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
                 '}';
+    }
+
+    public Person getPerson(){
+        return  new Person(this.getFname(),this.getLname(),this.getGender());
     }
 }
 

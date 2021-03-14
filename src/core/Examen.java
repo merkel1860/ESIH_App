@@ -1,4 +1,4 @@
-package java.model;
+package core;
 
 public class Examen {
 }

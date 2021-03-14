@@ -1,9 +1,7 @@
-package java.model;
+package core;
 
 
-import java.io.Serializable;
-
-public class Address  implements Serializable {
+public class Address  {
     String email;
 
     public Address(String email) {
@@ -16,5 +14,9 @@ public class Address  implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Address getAddress(){
+        return  new Address(this.email);
     }
 }
