@@ -7,9 +7,11 @@
     <navigation-rule>
         <from-view-id>/view/student_enroll.xhtml</from-view-id>
         <navigation-case>
-            <to-view-id>/index.xhtml</to-view-id>
+            <from-action>view/intro.xhtml</from-action>
+            <to-view-id>/view/intro.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
