@@ -7,7 +7,8 @@
     <navigation-rule>
         <from-view-id>/view/student_enroll.xhtml</from-view-id>
         <navigation-case>
-            <from-action>view/intro.xhtml</from-action>
+            <from-action>#{enrollController.navMainMenu}</from-action>
+            <from-outcome>main_menu</from-outcome>
             <to-view-id>/view/intro.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>

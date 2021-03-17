@@ -87,6 +87,10 @@ public class StudentEnrollController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null,facesMsg);
     }
 
+    public String navMainMenu(){
+        return "main_menu";
+    }
+
     private void resetParameterInForm() {
         first_name = "";
         last_name = "";
