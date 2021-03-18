@@ -1,20 +1,35 @@
 package core;
 
 public class Course {
-    private int title;
+    private String title;
     private int IdDegree;
     private int IdCourse;
+    private String description;
+    private int credits;
 
-    public Course(int title, int idDegree) {
-        this.title = title;
-        IdDegree = idDegree;
+
+    public Course() {
     }
 
-    public int getTitle() {
+    public Course(String title, String description, int credits) {
+        this.title = title;
+        this.description = description;
+        this.credits = credits;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(int title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -32,5 +47,13 @@ public class Course {
 
     public void setIdCourse(int idCourse) {
         IdCourse = idCourse;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

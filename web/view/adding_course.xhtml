@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:form id="courseForm">
+        <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
+        <h:panelGrid id="panelCourseInfo" columns="2">
+            <h:outputLabel id="titleLabel" value="Title" />
+            <h:inputText id="title"
+                         value="#{courseController.title}" />
+            <h:outputLabel id="descriptionabel" value="Description" />
+            <h:inputTextarea id="desc"
+                         value="#{courseController.description}" />
+            <h:outputLabel id="creditLabel" value="Credits" />
+            <h:inputText id="credits"
+                         value="#{courseController.credits}" />
+
+            <br />
+        </h:panelGrid>
+        <h:commandButton id="addingBtn" value="Add" action="#{courseController.addNewCourse}" />
+        <h:commandButton id="cancelingBtn" value="Cancel"  action="#{courseController.cancelEntry}" />
+        <h:commandButton id="returnBtn" value="Main Menu"  action="#{courseController.navMainMenu}" />
+    </h:form>
+</f:view>
+</html>

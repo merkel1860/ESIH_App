@@ -1,5 +1,8 @@
 package core;
 
+import com.sun.javafx.geom.transform.BaseTransform;
+import core.utils.Cxo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,14 @@ public class DAO {
     private static DAO objetDAO = new DAO();
     private  List<Student> studentList = new ArrayList<>();
     private  List<Course> courseList = new ArrayList<>();
+    private List<Degree> degreeList;
+    private List<CourseLevel> courseLevels;
 
     private DAO() {
+        Cxo.pickBaseParameter("Level");
+        courseLevels = Cxo.fetchCourseLevelFromDB();
+        Cxo.pickBaseParameter("Degree");
+        degreeList =  Cxo.fetchDegreeFromDB();
     }
 
     public static DAO getSingletonObjetDAO() {
