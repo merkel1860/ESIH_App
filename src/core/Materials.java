@@ -8,7 +8,7 @@ public class Materials extends Course{
      private Homework listOfHomework;
      private List<Examen> ListOfExamen;
 
-     public Materials(int title, int idDegree) {
+     public Materials(String title, int idDegree) {
           super(title, idDegree);
      }
 

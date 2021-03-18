@@ -11,6 +11,11 @@ public class Course {
     public Course() {
     }
 
+    public Course(String title, int idDegree) {
+        this.title = title;
+        IdDegree = idDegree;
+    }
+
     public Course(String title, String description, int credits) {
         this.title = title;
         this.description = description;
