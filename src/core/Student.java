@@ -77,7 +77,8 @@ public class Student extends Person {
         return this.getGender();
     }
 
-
-
+    public Long getIdStudent() {
+        return IdStudent;
+    }
 }
 

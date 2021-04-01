@@ -40,4 +40,14 @@ public class DAO {
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
     }
+
+    public boolean checkStudentStatus(String id){
+        boolean isStudentIn = false;
+        for(Student student : studentList){
+            if(Long.valueOf(id.trim()) == student.getIdStudent()){
+                isStudentIn = true;
+            }
+        }
+        return isStudentIn;
+    }
 }
