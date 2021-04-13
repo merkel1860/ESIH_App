@@ -42,14 +42,9 @@ public class DAO {
         this.courseList = courseList;
     }
 
-    public boolean checkStudentStatus(String id){
-        boolean isStudentIn = false;
-        for(Student student : studentList){
-            if(Long.valueOf(id.trim()).compareTo(student.getIdStudent()) ==0){
-                isStudentIn = true;
-            }
-        }
-        return isStudentIn;
+    public boolean checkStudentStatus(Long id){
+        Cxo.initConnection();
+        return Cxo.isStudentIDValid(id) ;
     }
 
     public void insertNewStudentDB(Student student){

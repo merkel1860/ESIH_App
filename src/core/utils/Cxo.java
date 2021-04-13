@@ -76,6 +76,15 @@ public class Cxo   {
 
     }
 
+    /*
+    *   This section is dedicated to all operations
+    * that involve student including :
+    * 1. add student
+    * 2. fetch a student
+    * 3. check student id
+    * */
+
+    // function to add student
     public static void insertData(Student student){
         try {
             String sqlString = "call esihdb.addStudent(?,?,?,?)";
@@ -89,6 +98,24 @@ public class Cxo   {
             throwables.printStackTrace();
 
         }
+    }
+
+    // function to check student id validity
+    public static boolean isStudentIDValid(Long id){
+        try {
+            String sqlString = "call esihdb.isIDValid(?)";
+            PreparedStatement pr = connection.prepareStatement(sqlString);
+            pr.setInt(1,id.intValue());
+            resultSet = pr.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getInt("status") == 1;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return true;
     }
     public static List<Degree> fetchDegreeFromDB(){
         List<Degree> degreeList = new ArrayList<>();

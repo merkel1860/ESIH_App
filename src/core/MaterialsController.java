@@ -24,7 +24,8 @@ public class MaterialsController implements Serializable {
         this.idStudent = idStudent;
     }
     public void checkingStudentStatus(){
-        if(DAO.getSingletonObjetDAO().checkStudentStatus(idStudent)){
+        Long idStudentLong = Long.valueOf(idStudent.trim());
+        if(DAO.getSingletonObjetDAO().checkStudentStatus(idStudentLong)){
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Valid Id Student",null);
             FacesContext.getCurrentInstance().addMessage(null,facesMsg);

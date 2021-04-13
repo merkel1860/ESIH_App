@@ -132,7 +132,7 @@ ALTER TABLE Degree_Course
     ADD CONSTRAINT FKDegree_Cou289413 FOREIGN KEY (FK_idDegree)
         REFERENCES Degree (PK_idDegree);
 
-# Create addStudent Procedure dedicated only to add new students
+# Create addStudent Procedure dedicated to adding new students
 delimiter //
 create procedure addStudent(
     in fname_para varchar(255),
@@ -145,3 +145,15 @@ begin
     VALUES (fname_para,lname_para,gender_para,yob_para);
 end //
 delimiter ;
+
+# Create isIDValid for checking student id validity
+delimiter //
+create procedure isIDValid(in id int)
+begin
+    declare status boolean default false;
+    if (select esihdb.Student.PK_idStudent from Student
+        where PK_idStudent = id) != 0 then
+        set status = true;
+    end if ;
+    select status;
+end //

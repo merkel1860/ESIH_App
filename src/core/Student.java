@@ -58,6 +58,10 @@ public class Student extends Person {
         this.address = address;
     }
 
+    public void setIdStudent(Long idStudent) {
+        IdStudent = idStudent;
+    }
+
     public List<Materials> getMaterials() {
         return materials;
     }
