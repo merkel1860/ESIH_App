@@ -36,4 +36,8 @@ public class MaterialsController implements Serializable {
         }
 
     }
+
+    public String navMainMenu(){
+        return "main_menu";
+    }
 }

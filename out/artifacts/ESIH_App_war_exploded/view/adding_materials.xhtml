@@ -13,13 +13,16 @@
 <f:view>
     <h:form id="materials_Form">
         <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
-        <h:panelGrid id="panelStudentInfo" columns="3">
+        <h:panelGrid id="panelStudentInfo" columns="4">
             <h:outputLabel id="idStudenLabel" value="Student ID" />
             <h:inputText id="id_student"
                          value="#{mtsController.idStudent}" />
             <h:commandButton id="checkingBtn"
                              value="Check"
                              action="#{mtsController.checkingStudentStatus}" />
+            <h:commandButton id="returnBtn"
+                             value="Main Menu"
+                             action="#{mtsController.navMainMenu}" />
             <br />
         </h:panelGrid>
     </h:form>
