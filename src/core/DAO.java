@@ -3,6 +3,7 @@ package core;
 import com.sun.javafx.geom.transform.BaseTransform;
 import core.utils.Cxo;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,10 @@ public class DAO {
     private List<CourseLevel> courseLevels;
 
     private DAO() {
-        Cxo.pickBaseParameter("Level");
-        courseLevels = Cxo.fetchCourseLevelFromDB();
-        Cxo.pickBaseParameter("Degree");
-        degreeList =  Cxo.fetchDegreeFromDB();
+        //Cxo.pickBaseParameter("Level");
+        //courseLevels = Cxo.fetchCourseLevelFromDB();
+       // Cxo.pickBaseParameter("Degree");
+       // degreeList =  Cxo.fetchDegreeFromDB();
     }
 
     public static DAO getSingletonObjetDAO() {
@@ -44,10 +45,15 @@ public class DAO {
     public boolean checkStudentStatus(String id){
         boolean isStudentIn = false;
         for(Student student : studentList){
-            if(Long.valueOf(id.trim()) == student.getIdStudent()){
+            if(Long.valueOf(id.trim()).compareTo(student.getIdStudent()) ==0){
                 isStudentIn = true;
             }
         }
         return isStudentIn;
+    }
+
+    public void insertNewStudentDB(Student student){
+        Cxo.initConnection();
+        Cxo.insertData(student);
     }
 }

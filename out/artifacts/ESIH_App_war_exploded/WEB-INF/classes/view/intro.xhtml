@@ -3,21 +3,27 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>Title</title>
 </h:head>
 <h:body>
-        <f:view>
-            <h:panelGrid columns="5" >
-                <h:outputLink id="studentEnrollMenu" value = "student_enroll.xhtml" >Enrollment</h:outputLink>
-                <h:outputLink id="studentAddingCourseMenu"
-                              value = "adding_materials.xhtml" >Adding Materials</h:outputLink>
-                <h:outputLink id="AddingCourseMenu"
-                              value = "adding_course.xhtml" >Adding Course</h:outputLink>
-            </h:panelGrid>
-        </f:view>
+    <f:view>
+        <h:form id="linksForm">
+            <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
+        <h:panelGrid columns="5" cellspacing="20">
+            <h:outputLink id="studentEnrollMenu"
+                     value="student_enroll.xhtml">Enrollment</h:outputLink>
+            <h:outputLink id="studentAddingCourseMenu"
+                     value="adding_materials.xhtml">Adding Materials</h:outputLink>
+            <h:outputLink id="AddingCourseMenu"
+                     value="adding_course.xhtml">Adding Course</h:outputLink>
+            <h:commandButton value="Load App Data"
+                             action="#{introController.init}" />
+        </h:panelGrid>
+        </h:form>
+    </f:view>
 </h:body>
 </html>

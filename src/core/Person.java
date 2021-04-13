@@ -64,10 +64,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
-                '}';
+        return lname+" "+fname;
     }
 
     public Person getPerson(){

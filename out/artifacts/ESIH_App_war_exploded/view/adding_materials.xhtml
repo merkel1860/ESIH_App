@@ -6,10 +6,23 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
+<h:head>
     <title>Title</title>
-</head>
-<body>
-
-</body>
+</h:head>
+<h:body>
+<f:view>
+    <h:form id="materials_Form">
+        <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
+        <h:panelGrid id="panelStudentInfo" columns="3">
+            <h:outputLabel id="idStudenLabel" value="Student ID" />
+            <h:inputText id="id_student"
+                         value="#{mtsController.idStudent}" />
+            <h:commandButton id="checkingBtn"
+                             value="Check"
+                             action="#{mtsController.checkingStudentStatus}" />
+            <br />
+        </h:panelGrid>
+    </h:form>
+</f:view>
+</h:body>
 </html>

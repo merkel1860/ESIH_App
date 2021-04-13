@@ -75,8 +75,9 @@ public class StudentEnrollController implements Serializable {
         Student student = new Student(first_name, last_name,gender, promotion, new Address(email));
         DAO.getSingletonObjetDAO().getStudentList().add(student);
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "You have successfully added a new user",null);
+                "You have successfully added new user : "+student.toString(),null);
         FacesContext.getCurrentInstance().addMessage(null,facesMsg);
+        DAO.getSingletonObjetDAO().insertNewStudentDB(student);
         resetParameterInForm();
     }
 

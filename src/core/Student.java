@@ -80,5 +80,10 @@ public class Student extends Person {
     public Long getIdStudent() {
         return IdStudent;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
 
