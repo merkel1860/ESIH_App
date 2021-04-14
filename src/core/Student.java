@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Student extends Person {
+public class Student extends Person implements Comparable{
     private Long IdStudent;
     private int year;
     private Address address;
@@ -88,6 +88,11 @@ public class Student extends Person {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return ((Student)o).getIdStudent().compareTo(this.getIdStudent());
     }
 }
 

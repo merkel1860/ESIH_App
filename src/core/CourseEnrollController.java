@@ -80,4 +80,8 @@ public class CourseEnrollController  implements Serializable {
         description = "";
         credits = 0;
     }
+
+    public String navMainMenu() {
+        return "main_menu";
+    }
 }

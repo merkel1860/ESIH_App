@@ -14,6 +14,15 @@
     </navigation-rule>
 
     <navigation-rule>
+        <from-view-id>/view/adding_materials.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{mtsController.navMainMenu}</from-action>
+            <from-outcome>main_menu</from-outcome>
+            <to-view-id>/view/intro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
             <to-view-id>/view/student_enroll.xhtml</to-view-id>
@@ -23,6 +32,15 @@
         <from-view-id>/view/intro.xhtml</from-view-id>
         <navigation-case>
             <to-view-id>/view/student_enroll.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/view/adding_course.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{courseController.navMainMenu}</from-action>
+            <from-outcome>main_menu</from-outcome>
+            <to-view-id>/view/intro.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

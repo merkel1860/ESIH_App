@@ -1,14 +1,14 @@
 
 package core;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @Named(value = "enrollController")
-@ApplicationScoped
+@SessionScoped
 
 public class StudentEnrollController implements Serializable {
 
@@ -18,6 +18,7 @@ public class StudentEnrollController implements Serializable {
     private String gender;
     private String email;
     private int promotion;
+    private int yob;
 
     public StudentEnrollController() {
     }
@@ -29,6 +30,14 @@ public class StudentEnrollController implements Serializable {
         this.gender = gender;
         this.email = email;
         this.promotion = promotion;
+    }
+
+    public int getYob() {
+        return yob;
+    }
+
+    public void setYob(int yob) {
+        this.yob = yob;
     }
 
     public String getFirst_name() {
@@ -72,7 +81,7 @@ public class StudentEnrollController implements Serializable {
     }
 
     public void addAStudent(){
-        Student student = new Student(first_name, last_name,gender, promotion, new Address(email));
+        Student student = new Student(first_name, last_name,gender, yob, new Address(email));
         DAO.getSingletonObjetDAO().getStudentList().add(student);
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                 "You have successfully added new user : "+student.toString(),null);

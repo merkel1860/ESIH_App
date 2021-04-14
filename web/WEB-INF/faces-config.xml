@@ -34,4 +34,13 @@
             <to-view-id>/view/student_enroll.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/view/adding_course.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{courseController.navMainMenu}</from-action>
+            <from-outcome>main_menu</from-outcome>
+            <to-view-id>/view/intro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

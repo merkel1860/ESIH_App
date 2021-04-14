@@ -25,6 +25,26 @@
                              action="#{mtsController.navMainMenu}" />
             <br />
         </h:panelGrid>
+        <!--Conditional rendering on this panelgrig which is required that
+        the student id is valid to display additional infos :
+        rendered="#{mtsController.last_name.length()>0}"
+        -->
+        <h:panelGrid id="studentInfosPanel"
+                     columns="6"
+                     rendered="#{mtsController.last_name.length()>0}">
+            <h:outputLabel id="fnameLabel" value="Firstname :"/>
+            <h:outputText id="fnameText"
+                          value="#{mtsController.first_name}"/>
+            <h:outputLabel id="lnameLabel" value="Lastname :"/>
+            <h:outputText id="lnameText"
+                          value="#{mtsController.last_name}"/>
+            <h:outputLabel id="idStudentLabel" value="Student ID :"/>
+            <h:outputText id="idStudentText"
+                          value="#{mtsController.idStudent}"/>
+            <!--TODO Define a new dropdown list to
+            fetch University' degrees and their cursus.
+            <h:selectOneMenu ></h:selectOneMenu>-->
+        </h:panelGrid>
     </h:form>
 </f:view>
 </h:body>

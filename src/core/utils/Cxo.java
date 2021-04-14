@@ -1,6 +1,7 @@
 package core.utils;
 
 import core.CourseLevel;
+import core.DAO;
 import core.Degree;
 import core.Student;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -10,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cxo   {
+public class Cxo {
     private static Connection connection;
     private static ResultSet resultSet;
     private static String sqlQuery;
@@ -21,14 +22,15 @@ public class Cxo   {
     public Cxo() {
     }
 
-    public static void pickBaseParameter(String param){
-        sqlQuery ="select * from" + " "+param;
+    public static void pickBaseParameter(String param) {
+        sqlQuery = "select * from" + " " + param;
     }
+
     public static void initConnection() {
         // loading driver
         try {
-        // new Driver name : com.mysql.cj.jdbc.Driver
-        // old Driver name : com.mysql.jdbc.Driver
+            // new Driver name : com.mysql.cj.jdbc.Driver
+            // old Driver name : com.mysql.jdbc.Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -37,8 +39,8 @@ public class Cxo   {
 
         // Establishing a new connection
         try {
-            connection= DriverManager.
-                    getConnection(cred,"nebel","nebel1984");
+            connection = DriverManager.
+                    getConnection(cred, "nebel", "nebel1984");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,7 +55,7 @@ public class Cxo   {
         }
     }
 
-    public static void createDBSchema(){
+    public static void createDBSchema() {
         // Creating esihdb schema
         try {
             // There is no needs for a new statement
@@ -77,23 +79,23 @@ public class Cxo   {
     }
 
     /*
-    *   This section is dedicated to all operations
-    * that involve student including :
-    * 1. add student
-    * 2. fetch a student
-    * 3. check student id
-    * */
+     *   This section is dedicated to all operations
+     * that involve student including :
+     * 1. add student
+     * 2. fetch a student
+     * 3. check student id
+     * */
 
     // function to add student
-    public static void insertData(Student student){
+    public static void insertData(Student student) {
         try {
             String sqlString = "call esihdb.addStudent(?,?,?,?)";
             PreparedStatement pr = connection.prepareStatement(sqlString);
-            pr.setString(1,student.getFirstname());
-            pr.setString(2,student.getLastname());
-            pr.setString(3,student.getStudentGender());
-            pr.setInt(4,student.getYear());
-             pr.execute();
+            pr.setString(1, student.getFirstname());
+            pr.setString(2, student.getLastname());
+            pr.setString(3, student.getStudentGender());
+            pr.setInt(4, student.getYear());
+            pr.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
@@ -101,13 +103,13 @@ public class Cxo   {
     }
 
     // function to check student id validity
-    public static boolean isStudentIDValid(Long id){
+    public static boolean isStudentIDValid(Long id) {
         try {
             String sqlString = "call esihdb.isIDValid(?)";
             PreparedStatement pr = connection.prepareStatement(sqlString);
-            pr.setInt(1,id.intValue());
+            pr.setInt(1, id.intValue());
             resultSet = pr.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return resultSet.getInt("status") == 1;
             }
 
@@ -117,10 +119,11 @@ public class Cxo   {
         }
         return true;
     }
-    public static List<Degree> fetchDegreeFromDB(){
+
+    public static List<Degree> fetchDegreeFromDB() {
         List<Degree> degreeList = new ArrayList<>();
         try {
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Degree a = new Degree();
                 a.setDegreeName(resultSet.getString("degree_name"));
                 a.setIdDegree(resultSet.getInt("PK_IdDegree"));
@@ -132,6 +135,29 @@ public class Cxo   {
         }
         return degreeList;
     }
+
+    public static void getStudentListFromDB() {
+        initConnection();
+        try {
+            String sqlString = "call esihdb.getStudents()";
+            PreparedStatement pr = connection.prepareStatement(sqlString);
+            resultSet = pr.executeQuery();
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setIdStudent((long) resultSet.getInt("PK_idStudent"));
+                student.setFname(resultSet.getString("fname"));
+                student.setLname(resultSet.getString("lname"));
+                student.setYear(resultSet.getInt("yob"));
+
+                DAO.getSingletonObjetDAO().
+                        getStudentList().add(student);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
 
 /*
     public static List<CourseLevel> fetchCourseLevelFromDB(){
@@ -152,5 +178,5 @@ public class Cxo   {
     }
 */
 
-
+    }
 }
