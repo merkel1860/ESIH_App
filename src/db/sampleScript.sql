@@ -157,3 +157,63 @@ begin
     end if ;
     select status;
 end //
+
+# Create procedure to check if a degree proram exists
+delimiter //
+create procedure isDegreeExisted(in name varchar(250), in id int)
+begin
+    declare status int default 0;
+    select PK_idDegree into status from Degree
+    where degree_name = name
+       or PK_idDegree = id;
+    if status != 0 then
+        set status = 1;
+        select status;
+    else
+        select status;
+    end if ;
+end //
+
+# Create procedure to get Degree program by name
+create procedure getDegreeByName(in name varchar(250))
+begin
+    select * from Degree
+    where degree_name = name;
+end //
+
+# Function to test the existence of a degree
+SET GLOBAL log_bin_trust_function_creators = 1;
+delimiter //
+create function isDegreeExisted(name varchar(250), id int)
+    returns int
+
+begin
+    declare status int default 0;
+    select PK_idDegree into status from Degree
+    where degree_name = name
+       or PK_idDegree = id;
+    if status != 0 then
+        set status = 1;
+    end if ;
+    return status;
+end //
+
+# Create procedure to insert new tuple to Degree
+delimiter //
+create procedure insertDegree(in name varchar(250), in years int)
+begin
+    declare status int default 1;
+    if(isDegreeExisted(name,0) = 0) then
+        insert into Degree(degree_name, length)
+            value (name, years);
+        set status = 0;
+    else select status;
+    end if ;
+end //
+
+# Create procedure get all degree program from db
+delimiter //
+create procedure getDegreeListFromDB()
+begin
+    select PK_idDegree,degree_name, length from Degree;
+end //

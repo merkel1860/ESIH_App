@@ -23,11 +23,17 @@
             <h:outputLabel id="promoLabel" value="Promotion" />
             <h:inputText id="promo"
                          value="#{enrollController.promotion}" />
+            <h:outputLabel id="yobLabel" value="Year of Birth" />
+            <h:inputText id="yob"
+                         value="#{enrollController.yob}" />
             <br />
         </h:panelGrid>
-        <h:commandButton id="addingBtn" value="Add" action="#{enrollController.addAStudent}" />
-        <h:commandButton id="cancelingBtn" value="Cancel"  action="#{enrollController.cancelEntry}" />
-        <h:commandButton id="returnBtn" value="Main Menu"  action="#{enrollController.navMainMenu}" />
+        <h:commandButton id="addingBtn" value="Add"
+                         action="#{enrollController.addAStudent}" />
+        <h:commandButton id="cancelingBtn" value="Cancel"
+                         action="#{enrollController.cancelEntry}" />
+        <h:commandButton id="returnBtn" value="Main Menu"
+                         action="#{enrollController.navMainMenu}" />
     </h:form>
 </f:view>
 </html>

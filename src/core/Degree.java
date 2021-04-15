@@ -39,4 +39,12 @@ public class Degree {
     public void setIdDegree(int idDegree) {
         this.idDegree = idDegree;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "degreeName='" + degreeName + '\'' +
+                ", idDegree=" + idDegree +
+                '}';
+    }
 }

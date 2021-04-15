@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:form id="degreeForm">
+        <h:messages errorStyle="color: #ff0000" infoStyle="color: #008000" globalOnly="true"/>
+        <h:panelGrid id="panelDegree" columns="2">
+            <h:outputLabel id="degreeabel" value="Degree"/>
+            <h:selectOneMenu id="degreeSelectOneMenu"
+                             value="#{degreeController.courseTitle}">
+                <f:selectItems
+                        value="#{degreeController.degreeList}"/>
+            </h:selectOneMenu>
+            <br/>
+        </h:panelGrid>
+        <h:commandButton id="addingBtn" value="Add" action="#{degreeController.addNewDegree}"/>
+        <h:commandButton id="cancelingBtn" value="Cancel" action="#{degreeController.cancelEntry}"/>
+        <h:commandButton id="returnBtn" value="Main Menu" action="#{degreeController.navMainMenu}"/>
+    </h:form>
+</f:view>
+</html>

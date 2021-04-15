@@ -123,6 +123,9 @@ public class Cxo {
     public static List<Degree> fetchDegreeFromDB() {
         List<Degree> degreeList = new ArrayList<>();
         try {
+            String sqlString = "call esihdb.getDegreeListFromDB();";
+            PreparedStatement pr = connection.prepareStatement(sqlString);
+            resultSet = pr.executeQuery();
             while (resultSet.next()) {
                 Degree a = new Degree();
                 a.setDegreeName(resultSet.getString("degree_name"));

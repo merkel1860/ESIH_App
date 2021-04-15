@@ -70,4 +70,14 @@ public class DAO implements Serializable {
         Cxo.initConnection();
         Cxo.insertData(student);
     }
+
+    // Retrieve all degree program from DB
+    public void fetchDegreeList(){
+        Cxo.initConnection();
+        Cxo.fetchDegreeFromDB();
+    }
+
+    public List<Degree> getDegreeList() {
+        return degreeList;
+    }
 }
