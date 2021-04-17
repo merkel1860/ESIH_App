@@ -178,7 +178,10 @@ public class DegreeController implements Serializable {
 
     public void setEditable(Boolean editable) {
         this.editable = editable;
-        editLevel = false;
+        if (editable) {
+            editLevel = false;
+        }
+
     }
 
     // Sub Form for adding more degree program on demand
@@ -191,17 +194,19 @@ public class DegreeController implements Serializable {
         degree.setIdDegree(DAO.getSingletonObjetDAO().
                 retrieveDegreeID(degree.getDegreeName()));
         DAO.getSingletonObjetDAO().getDegreeList().add(degree);
-        UpdateInterfaceMessage(statusSavingProcess,degreeTitle);
+        UpdateInterfaceMessage(statusSavingProcess, degreeTitle);
         populateDegreeSelectItem();
         cancelNewDegree();
         addWillBeUpdatedComponent("degreeSelectOneMenu");
 
     }
+
     // Updating View component by id
     public static void addWillBeUpdatedComponent(final String componentId) {
         FacesContext.getCurrentInstance().getPartialViewContext()
                 .getRenderIds().add(componentId);
     }
+
     // Flexible updateInterfaceMessage call after each request
     // to inform end-user of operation's completeness status
     private void UpdateInterfaceMessage(boolean statusSavingProcess,
@@ -212,7 +217,7 @@ public class DegreeController implements Serializable {
                     "You have successfully added : "
                             + scenario, null);
             FacesContext.getCurrentInstance().addMessage(null, facesMsg);
-        }else {
+        } else {
             FacesMessage facesMsg = new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
                     "Error while adding  : "
@@ -237,23 +242,16 @@ public class DegreeController implements Serializable {
     }
 
     public void listenerDegreeSelectOneMenu(ValueChangeEvent changeEvent) {
-        System.out.println("Checking new:"+
-                changeEvent.getNewValue());
-        // TODO get ride of this structure for a better one.
-        if( changeEvent.getOldValue()==null || changeEvent.getOldValue().toString().trim().isEmpty()){
-            editLevel = true;
-        }else {
-            System.out.println("Checking old :"+
-                    changeEvent.getOldValue());
-        }
-
+        editLevel = true;
     }
 
     public Boolean getEditLevel() {
         return editLevel;
     }
 
-
+    public void setEditLevel(boolean editLevel) {
+        this.editLevel = editLevel;
+    }
     /*
      * */
 
