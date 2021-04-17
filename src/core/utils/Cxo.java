@@ -120,6 +120,7 @@ public class Cxo {
         return true;
     }
 
+    // Fetching all degree program directly from database
     public static List<Degree> fetchDegreeFromDB() {
         List<Degree> degreeList = new ArrayList<>();
         try {
@@ -139,7 +140,8 @@ public class Cxo {
         return degreeList;
     }
 
-    public static void getStudentListFromDB() {
+    // Fetching all students from database
+    public static void fetchStudentListFromDB() {
         initConnection();
         try {
             String sqlString = "call esihdb.getStudents()";
@@ -181,5 +183,62 @@ public class Cxo {
     }
 */
 
+    }
+
+    public static boolean isInsertFeasible(Object o){
+        boolean testStatus = false;
+        if(o instanceof Degree){
+            Degree degree = (Degree) o;
+            String sqlString = "call esihdb.isDegreeExisted(?,?)";
+            try {
+                PreparedStatement pr = connection.prepareStatement(sqlString);
+                pr.setString(1, degree.getDegreeName());
+                pr.setInt(2, 0);
+                resultSet = pr.executeQuery();
+                if(resultSet.next()){
+                    if(resultSet.getInt("status")==0){
+                        testStatus = true;
+                    }
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+        return testStatus;
+    }
+    public static boolean insertData(Degree degree) {
+        boolean statusInsertion = false;
+        if(isInsertFeasible(degree)){
+            try {
+                String sqlString = "call esihdb.insertDegree(?,?)";
+                PreparedStatement pr = connection.prepareStatement(sqlString);
+                pr.setString(1, degree.getDegreeName());
+                pr.setInt(2, degree.getLength());
+                pr.execute();
+                statusInsertion = true;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+
+            }
+        }
+        return statusInsertion;
+    }
+
+    public static int fetchDegreeInfo(String degreeName) {
+        int id = 0;
+        try {
+            String sqlString = "call esihdb.getDegreeByName(?)";
+            PreparedStatement pr = connection.prepareStatement(sqlString);
+            pr.setString(1, degreeName);
+            resultSet = pr.executeQuery();
+            if(resultSet.next()){
+                id = resultSet.getInt("PK_idDegree");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return id;
     }
 }

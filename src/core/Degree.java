@@ -16,6 +16,11 @@ public class Degree {
     public Degree() {
     }
 
+    public Degree(String degreeTitle, int degreeYears) {
+        degreeName = degreeTitle;
+        length = degreeYears;
+    }
+
     public String getDegreeName() {
         return degreeName;
     }
@@ -42,9 +47,6 @@ public class Degree {
 
     @Override
     public String toString() {
-        return "{" +
-                "degreeName='" + degreeName + '\'' +
-                ", idDegree=" + idDegree +
-                '}';
+        return degreeName + " : " + idDegree ;
     }
 }

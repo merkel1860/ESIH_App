@@ -1,8 +1,11 @@
 package core;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,8 +15,8 @@ import java.util.List;
 @SessionScoped
 public class DegreeController implements Serializable {
     /*
-    *  We define holder for form parameters
-    * */
+     *  We define holder for form parameters
+     * */
 
 
     // degree infos
@@ -21,9 +24,10 @@ public class DegreeController implements Serializable {
     private String degreeTitle;
     private int degreeYears;
 
-    private List<Degree> degrees = DAO.getSingletonObjetDAO().
-            getDegreeList();
+    private List<Degree> degrees;
     private List<SelectItem> degreeList;
+    private final String editColumn;
+    private boolean editable;
 
     // Degree Courses
     private Long idCourse;
@@ -31,10 +35,28 @@ public class DegreeController implements Serializable {
     private String courseDescription;
     private int courseCredits;
 
+    // Level Infos
+    private String selectedLevel;
+    private boolean editLevel;
+
+    // Sub form for gathering information on new Degree
+    private boolean subFormStatus = false;
+
+    // Default Constructor
     public DegreeController() {
+        editColumn = "New Degree";
+        editable = false;
+        editLevel = false;
     }
 
 
+    @PostConstruct
+    private void testFetchingDB() {
+        DAO.getSingletonObjetDAO().fetchDegreeList();
+        degrees = DAO.getSingletonObjetDAO().
+                getDegreeList();
+        populateDegreeSelectItem();
+    }
 
     // Getters and Setters for Degree specifically
     public List<SelectItem> getDegreeList() {
@@ -69,11 +91,16 @@ public class DegreeController implements Serializable {
         this.degreeYears = degreeYears;
     }
 
-    public void populateDegreeSelectItem(){
+    // Populating SelectItem with Degree programs
+    // By converting List<Degree>  to List<SelectItem>
+    public void populateDegreeSelectItem() {
         degreeList = new ArrayList<SelectItem>();
-        for(Degree degree : DAO.getSingletonObjetDAO().
-                getDegreeList()){
-            degreeList.add(new SelectItem(degree.toString()));
+        if (degrees.size() > 0) {
+            for (Degree degree : degrees) {
+                degreeList.add(new SelectItem(degree.toString()));
+            }
+        } else {
+            degreeList.add(new SelectItem("Please enter new degrees"));
         }
 
     }
@@ -112,6 +139,7 @@ public class DegreeController implements Serializable {
     }
 
     public String navMainMenu() {
+        editLevel = false;
         return "main_menu";
     }
 
@@ -123,7 +151,7 @@ public class DegreeController implements Serializable {
     public void resetDegree() {
         idDegree = 0L;
         degreeTitle = "";
-        degreeYears =0 ;
+        degreeYears = 0;
     }
 
     public void resetCourse() {
@@ -133,7 +161,100 @@ public class DegreeController implements Serializable {
         courseDescription = "";
     }
 
+    public boolean isactivatedSubForm() {
+        this.subFormStatus = !(subFormStatus);
+        System.out.println("Status : " + subFormStatus);
+        return subFormStatus;
+
+    }
+
+    public String getEditColumn() {
+        return editColumn;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
+        editLevel = false;
+    }
+
+    // Sub Form for adding more degree program on demand
+    public void saveNewDegree() {
+        boolean statusSavingProcess = false;
+        Degree degree = new Degree(degreeTitle.toUpperCase(), degreeYears);
+
+        statusSavingProcess = DAO.getSingletonObjetDAO().
+                insertNewDegree(degree);
+        degree.setIdDegree(DAO.getSingletonObjetDAO().
+                retrieveDegreeID(degree.getDegreeName()));
+        DAO.getSingletonObjetDAO().getDegreeList().add(degree);
+        UpdateInterfaceMessage(statusSavingProcess,degreeTitle);
+        populateDegreeSelectItem();
+        cancelNewDegree();
+        addWillBeUpdatedComponent("degreeSelectOneMenu");
+
+    }
+    // Updating View component by id
+    public static void addWillBeUpdatedComponent(final String componentId) {
+        FacesContext.getCurrentInstance().getPartialViewContext()
+                .getRenderIds().add(componentId);
+    }
+    // Flexible updateInterfaceMessage call after each request
+    // to inform end-user of operation's completeness status
+    private void UpdateInterfaceMessage(boolean statusSavingProcess,
+                                        String scenario) {
+        if (statusSavingProcess) {
+            FacesMessage facesMsg = new FacesMessage(
+                    FacesMessage.SEVERITY_INFO,
+                    "You have successfully added : "
+                            + scenario, null);
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        }else {
+            FacesMessage facesMsg = new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR,
+                    "Error while adding  : "
+                            + scenario, null);
+            FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+        }
+    }
+
+    // Sub Form clearing
+    public void cancelNewDegree() {
+        degreeTitle = "";
+        degreeYears = 0;
+        editable = false;
+    }
+
+    public String getSelectedLevel() {
+        return selectedLevel;
+    }
+
+    public void setSelectedLevel(String selectedLevel) {
+        this.selectedLevel = selectedLevel;
+    }
+
+    public void listenerDegreeSelectOneMenu(ValueChangeEvent changeEvent) {
+        System.out.println("Checking new:"+
+                changeEvent.getNewValue());
+        // TODO get ride of this structure for a better one.
+        if( changeEvent.getOldValue()==null || changeEvent.getOldValue().toString().trim().isEmpty()){
+            editLevel = true;
+        }else {
+            System.out.println("Checking old :"+
+                    changeEvent.getOldValue());
+        }
+
+    }
+
+    public Boolean getEditLevel() {
+        return editLevel;
+    }
+
+
     /*
-    * */
+     * */
 
 }

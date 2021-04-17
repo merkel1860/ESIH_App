@@ -2,13 +2,16 @@ package core;
 
 import core.utils.Cxo;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ApplicationScoped
+//@ApplicationScoped
+@Named(value ="DAO")
+@SessionScoped
+
 public class DAO implements Serializable {
 
     private static DAO objetDAO = new DAO();
@@ -52,7 +55,7 @@ public class DAO implements Serializable {
 
     public boolean checkStudentStatus(Long id){
         Cxo.initConnection();
-        Cxo.getStudentListFromDB();
+        Cxo.fetchStudentListFromDB();
         return Cxo.isStudentIDValid(id) ;
     }
 
@@ -74,10 +77,22 @@ public class DAO implements Serializable {
     // Retrieve all degree program from DB
     public void fetchDegreeList(){
         Cxo.initConnection();
-        Cxo.fetchDegreeFromDB();
+        degreeList = Cxo.fetchDegreeFromDB();
     }
 
     public List<Degree> getDegreeList() {
         return degreeList;
+    }
+
+    public boolean insertNewDegree(Degree degree) {
+        boolean statusInsertion = false;
+        Cxo.initConnection();
+        statusInsertion = Cxo.insertData(degree);
+        return statusInsertion;
+    }
+
+    public int retrieveDegreeID(String degreeName) {
+        Cxo.initConnection();
+        return Cxo.fetchDegreeInfo(degreeName);
     }
 }

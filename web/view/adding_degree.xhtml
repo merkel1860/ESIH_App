@@ -8,18 +8,74 @@
 <f:view>
     <h:form id="degreeForm">
         <h:messages errorStyle="color: #ff0000" infoStyle="color: #008000" globalOnly="true"/>
-        <h:panelGrid id="panelDegree" columns="2">
-            <h:outputLabel id="degreeabel" value="Degree"/>
+        <h:panelGrid id="panelDegree" columns="3">
+
+            <h:outputLabel id="degreeLabel" value="Degree"/>
             <h:selectOneMenu id="degreeSelectOneMenu"
-                             value="#{degreeController.courseTitle}">
+                             onchange="submit()"
+                             valueChangeListener="#{degreeController.
+                             listenerDegreeSelectOneMenu}"
+                             value="#{degreeController.degreeTitle}">
                 <f:selectItems
-                        value="#{degreeController.degreeList}"/>
+                        value="#{degreeController.degreeList}"
+                        var="anItem"
+                        noSelectionValue="Make your choice"
+                        itemValue="#{anItem.description}"
+                />
             </h:selectOneMenu>
+            <h:panelGroup id="idDegreePanelGroup">
+                <h:outputText value="New Degree"
+                              style="font-weight: Normal"/>
+                <br/>
+                <h:selectBooleanCheckbox id="idDegreeCheckBox"
+                                         value="#{degreeController.editable}"
+                                         onclick="submit()"
+                />
+            </h:panelGroup>
+
+
+            <h:outputLabel id="idDegreeLevelLabel"
+                           rendered="#{degreeController.editLevel}"
+                           value="Level"/>
+            <h:selectOneMenu id="iddegreeLevelSelectOneMenu"
+                             rendered="#{degreeController.editLevel}"
+                             value="#{degreeController.selectedLevel}">
+                <f:selectItems
+                        value="#{degreeController.degreeList}"
+                        var="anItem"
+                        noSelectionValue="Make your choice"
+                        itemValue="#{anItem.description}"
+                />
+            </h:selectOneMenu>
+
             <br/>
         </h:panelGrid>
-        <h:commandButton id="addingBtn" value="Add" action="#{degreeController.addNewDegree}"/>
-        <h:commandButton id="cancelingBtn" value="Cancel" action="#{degreeController.cancelEntry}"/>
-        <h:commandButton id="returnBtn" value="Main Menu" action="#{degreeController.navMainMenu}"/>
+        <br/>
+        <br/>
+        <h:commandButton id="addingBtn" value="Add"
+                         action="#{degreeController.addNewDegree}"/>
+        <h:commandButton id="cancelingBtn" value="Cancel"
+                         action="#{degreeController.cancelEntry}"/>
+        <h:commandButton id="returnBtn" value="Main Menu"
+                         action="#{degreeController.navMainMenu}"/>
+    </h:form>
+    <br/> <br/>
+    <h:form id="idDegreeSubForm" rendered="#{degreeController.editable}">
+        <h:panelGrid columns="2">
+            <h:outputLabel id="idDegreeTitleLabel"
+                           value="Degree Title"/>
+            <h:inputText id="idDegreeTitleText"
+                         value="#{degreeController.degreeTitle}"/>
+            <h:outputLabel id="idDegreeYearsLabel"
+                           value="Duration (years)"/>
+            <h:inputText id="idDegreeYearsText"
+                         value="#{degreeController.degreeYears}"/>
+        </h:panelGrid>
+        <br/>
+        <h:commandButton id="idSaveDegreeBtn" value="Save"
+                         action="#{degreeController.saveNewDegree()}"/>
+        <h:commandButton id="idCancelDegreeBtn" value="Cancel"
+                         action="#{degreeController.cancelNewDegree()}"/>
     </h:form>
 </f:view>
 </html>

@@ -43,4 +43,13 @@
             <to-view-id>/view/intro.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/view/adding_degree.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{degreeController.navMainMenu}</from-action>
+            <from-outcome>main_menu</from-outcome>
+            <to-view-id>/view/intro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
