@@ -1,9 +1,13 @@
 package core;
 
+import java.util.List;
+import java.util.logging.Level;
+
 public class Degree {
     private String degreeName;
     private int length;
     private  int idDegree;
+    private List<DegreeLevel> levelList;
 
 
     public Degree(String degreeName, int length, int idDegree) {
@@ -43,6 +47,14 @@ public class Degree {
 
     public void setIdDegree(int idDegree) {
         this.idDegree = idDegree;
+    }
+
+    public List<DegreeLevel> getLevelList() {
+        return levelList;
+    }
+
+    public void setLevelList(List<DegreeLevel> levelList) {
+        this.levelList = levelList;
     }
 
     @Override

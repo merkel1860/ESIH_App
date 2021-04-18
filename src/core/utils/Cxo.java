@@ -1,9 +1,6 @@
 package core.utils;
 
-import core.CourseLevel;
-import core.DAO;
-import core.Degree;
-import core.Student;
+import core.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
@@ -99,6 +96,15 @@ public class Cxo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
+        }finally {
+            try {
+                connection.close();
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(throwables.toString());
+            }
+
         }
     }
 
@@ -116,7 +122,17 @@ public class Cxo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
+        }finally {
+            try {
+                connection.close();
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(throwables.toString());
+            }
+
         }
+        // TODO check this out
         return true;
     }
 
@@ -136,6 +152,15 @@ public class Cxo {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(throwables.toString());
+            }
+
         }
         return degreeList;
     }
@@ -161,6 +186,15 @@ public class Cxo {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+
+        }finally {
+            try {
+                connection.close();
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(throwables.toString());
+            }
 
         }
 
@@ -202,11 +236,21 @@ public class Cxo {
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            }finally {
+                try {
+                    connection.close();
+                    resultSet.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    System.out.println(throwables.toString());
+                }
+
             }
         }
 
         return testStatus;
     }
+
     public static boolean insertData(Degree degree) {
         boolean statusInsertion = false;
         if(isInsertFeasible(degree)){
@@ -220,6 +264,15 @@ public class Cxo {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
 
+            }finally {
+                try {
+                    connection.close();
+                    resultSet.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    System.out.println(throwables.toString());
+                }
+
             }
         }
         return statusInsertion;
@@ -231,6 +284,7 @@ public class Cxo {
             String sqlString = "call esihdb.getDegreeByName(?)";
             PreparedStatement pr = connection.prepareStatement(sqlString);
             pr.setString(1, degreeName);
+
             resultSet = pr.executeQuery();
             if(resultSet.next()){
                 id = resultSet.getInt("PK_idDegree");
@@ -238,7 +292,54 @@ public class Cxo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
+        }finally {
+            try {
+                connection.close();
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(throwables.toString());
+            }
+
         }
         return id;
+    }
+
+    public static List<DegreeLevel> fetchLevelListByDegree(
+            String DegreeInfos) {
+        DegreeInfos = DegreeInfos.substring(0,DegreeInfos.lastIndexOf(" "));
+        List<DegreeLevel> degreeLevels = new ArrayList<>();
+        DegreeLevel  level;
+        try {
+            System.out.println("Parameter :"+DegreeInfos);
+            String sqlString = "call esihdb.getLevelListbyDegree(?)";
+            PreparedStatement pr = connection.prepareStatement(sqlString);
+            pr.setString(1, DegreeInfos);
+            System.out.println("SQL "+pr.toString());
+            resultSet = pr.executeQuery();
+            System.out.println("Before getting into..."+connection.getWarnings());
+            while(resultSet.next()){
+                level = new DegreeLevel();
+                level.setLevelName(
+                        resultSet.getString("level_name"));
+                System.out.println("Loading :"+
+                        level.getLevelName());
+                degreeLevels.add(level);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }finally {
+            try {
+                connection.close();
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(throwables.toString());
+            }
+
+        }
+        System.out.println("How many level:"+degreeLevels.size());
+        return degreeLevels;
     }
 }

@@ -95,4 +95,10 @@ public class DAO implements Serializable {
         Cxo.initConnection();
         return Cxo.fetchDegreeInfo(degreeName);
     }
+
+    public List<DegreeLevel> fetchlevelsByDegree(String selectedDegreeInfos) {
+        Cxo.initConnection();
+        return Cxo.fetchLevelListByDegree(selectedDegreeInfos);
+
+    }
 }

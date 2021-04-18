@@ -38,6 +38,8 @@ public class DegreeController implements Serializable {
     // Level Infos
     private String selectedLevel;
     private boolean editLevel;
+    private List<DegreeLevel> degreeLevelList;
+    private List<SelectItem> selectLevelItems;
 
     // Sub form for gathering information on new Degree
     private boolean subFormStatus = false;
@@ -48,7 +50,6 @@ public class DegreeController implements Serializable {
         editable = false;
         editLevel = false;
     }
-
 
     @PostConstruct
     private void testFetchingDB() {
@@ -91,6 +92,7 @@ public class DegreeController implements Serializable {
         this.degreeYears = degreeYears;
     }
 
+
     // Populating SelectItem with Degree programs
     // By converting List<Degree>  to List<SelectItem>
     public void populateDegreeSelectItem() {
@@ -105,6 +107,21 @@ public class DegreeController implements Serializable {
 
     }
 
+    // Populating SelectItem with Degree programs
+    // By converting List<Degree>  to List<SelectItem>
+    public void populateLevelSelectItem() {
+        selectLevelItems= new ArrayList<SelectItem>();
+        if (degreeLevelList.size() > 0) {
+            for (DegreeLevel degreeLevel : degreeLevelList) {
+                selectLevelItems.add(
+                        new SelectItem(
+                                degreeLevel.getLevelName()));
+            }
+        } else {
+            selectLevelItems.add(new SelectItem("Please enter new level"));
+        }
+
+    }
     // Getters and Setters for Course specifically
     public Long getIdCourse() {
         return idCourse;
@@ -148,6 +165,7 @@ public class DegreeController implements Serializable {
         resetCourse();
     }
 
+    // Reset degree local variables
     public void resetDegree() {
         idDegree = 0L;
         degreeTitle = "";
@@ -161,12 +179,12 @@ public class DegreeController implements Serializable {
         courseDescription = "";
     }
 
-    public boolean isactivatedSubForm() {
+    /*public boolean isactivatedSubForm() {
         this.subFormStatus = !(subFormStatus);
         System.out.println("Status : " + subFormStatus);
         return subFormStatus;
 
-    }
+    }*/
 
     public String getEditColumn() {
         return editColumn;
@@ -182,6 +200,14 @@ public class DegreeController implements Serializable {
             editLevel = false;
         }
 
+    }
+
+    public List<SelectItem> getSelectLevelItems() {
+        return selectLevelItems;
+    }
+
+    public void setSelectLevelItems(List<SelectItem> selectLevelItems) {
+        this.selectLevelItems = selectLevelItems;
     }
 
     // Sub Form for adding more degree program on demand
@@ -205,6 +231,12 @@ public class DegreeController implements Serializable {
     public static void addWillBeUpdatedComponent(final String componentId) {
         FacesContext.getCurrentInstance().getPartialViewContext()
                 .getRenderIds().add(componentId);
+    }
+
+    // Remove View component by id
+    public static void removeWillBeUpdatedComponent(final String componentId) {
+        FacesContext.getCurrentInstance().getPartialViewContext()
+                .getRenderIds().remove(componentId);
     }
 
     // Flexible updateInterfaceMessage call after each request
@@ -241,8 +273,21 @@ public class DegreeController implements Serializable {
         this.selectedLevel = selectedLevel;
     }
 
+    // Listener on SelectOnMenu for Degree selection
     public void listenerDegreeSelectOneMenu(ValueChangeEvent changeEvent) {
+
+        String selectedDegreeInfos = changeEvent.
+                getNewValue().toString().
+                substring(0,changeEvent.getNewValue().toString().indexOf(":"));
+
+        degreeLevelList = DAO.getSingletonObjetDAO().
+                fetchlevelsByDegree(selectedDegreeInfos);
+        populateLevelSelectItem();
         editLevel = true;
+        //TODO addWillBeUpdatedComponent()
+        System.out.println(changeEvent.
+                getNewValue().toString().
+                substring(0,changeEvent.getNewValue().toString().indexOf(":")-1));
     }
 
     public Boolean getEditLevel() {
