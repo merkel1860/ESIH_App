@@ -307,7 +307,6 @@ public class Cxo {
 
     public static List<DegreeLevel> fetchLevelListByDegree(
             String DegreeInfos) {
-        DegreeInfos = DegreeInfos.substring(0,DegreeInfos.lastIndexOf(" "));
         List<DegreeLevel> degreeLevels = new ArrayList<>();
         DegreeLevel  level;
         try {

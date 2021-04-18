@@ -278,7 +278,7 @@ public class DegreeController implements Serializable {
 
         String selectedDegreeInfos = changeEvent.
                 getNewValue().toString().
-                substring(0,changeEvent.getNewValue().toString().indexOf(":"));
+                substring(0,changeEvent.getNewValue().toString().indexOf(" :"));
 
         degreeLevelList = DAO.getSingletonObjetDAO().
                 fetchlevelsByDegree(selectedDegreeInfos);
