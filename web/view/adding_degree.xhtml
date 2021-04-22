@@ -7,7 +7,8 @@
         xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <h:form id="degreeForm">
-        <h:messages errorStyle="color: #ff0000" infoStyle="color: #008000" globalOnly="true"/>
+        <h:messages errorStyle="color: #ff0000"
+                    infoStyle="color: #008000" globalOnly="true"/>
         <h:panelGrid id="panelDegree" columns="3">
 
             <h:outputLabel id="degreeLabel" value="Degree"/>
@@ -19,7 +20,6 @@
                 <f:selectItems
                         value="#{degreeController.degreeList}"
                         var="anItem"
-                        noSelectionValue="Make your choice"
                         itemValue="#{anItem.description}"
                 />
             </h:selectOneMenu>
@@ -28,9 +28,8 @@
                               style="font-weight: Normal"/>
                 <br/>
                 <h:selectBooleanCheckbox id="idDegreeCheckBox"
-                                         value="#{degreeController.editable}"
-                                         onclick="submit()"
-                />
+                                         value="#{degreeController.editDegree}"
+                                         onclick="submit()"/>
             </h:panelGroup>
 
 
@@ -44,23 +43,53 @@
                         value="#{degreeController.selectLevelItems}"
                         var="anItem"
                         noSelectionValue="Make your choice"
-                        itemValue="#{anItem.description}"
-                />
+                        itemValue="#{anItem.description}"/>
             </h:selectOneMenu>
+            <h:panelGroup id="idNewLevelPanelGroup"
+                          rendered="#{degreeController.levelCheckBox}">
+                <h:outputText value="New Level"
+                              style="font-weight: Normal"/>
+                <br/>
+                <h:selectBooleanCheckbox id="idLevelCheckBox"
+                                         value="#{degreeController.editCheckBox}"
+                                         onclick="submit()"/>
+            </h:panelGroup>
 
             <br/>
         </h:panelGrid>
+
         <br/>
         <br/>
         <h:commandButton id="addingBtn" value="Add"
-                         action="#{degreeController.addNewDegree}"/>
+                         action=""/>
         <h:commandButton id="cancelingBtn" value="Cancel"
                          action="#{degreeController.cancelEntry}"/>
         <h:commandButton id="returnBtn" value="Main Menu"
                          action="#{degreeController.navMainMenu}"/>
     </h:form>
     <br/> <br/>
-    <h:form id="idDegreeSubForm" rendered="#{degreeController.editable}">
+    <!--<h:form id="testAJAX" >
+        <h:panelGroup>
+        <h:inputText   value="#{degreeController.testCheckBox}"
+                     id="testID">
+            <f:ajax event="blur" execute="@this"
+                    render="idtestLabel"
+                    immediate="true"
+            />
+        </h:inputText>
+        <h:message for="testID"
+                   id="inputMessageError"
+                   errorStyle="color: red"/>
+        <br/>
+        <h:outputLabel
+                id="idtestLabel"
+                value="#{degreeController.testCheckBox}"/>
+    </h:panelGroup>
+    </h:form-->
+
+    <!--Sub-form to add new degrees in case there is none or just for adding
+    new ones-->
+    <h:form id="idDegreeSubForm" rendered="#{degreeController.editDegree}">
         <h:panelGrid columns="2">
             <h:outputLabel id="idDegreeTitleLabel"
                            value="Degree Title"/>
@@ -73,8 +102,31 @@
         </h:panelGrid>
         <br/>
         <h:commandButton id="idSaveDegreeBtn" value="Save"
-                         action="#{degreeController.saveNewDegree()}"/>
+                         action="#{degreeController.saveNewDegreeOrLevel('degree')}"/>
         <h:commandButton id="idCancelDegreeBtn" value="Cancel"
+                         action="#{degreeController.cancelNewDegree()}"/>
+    </h:form>
+
+<!--    Sub-Form aiming to add new levels to existed Degree programs-->
+    <h:form id="idLevelSubForm" rendered="#{degreeController.editCheckBox}">
+        <h:panelGrid columns="2">
+            <h:outputLabel id="idLevelTitleLabel"
+                           value="Level Title"/>
+            <h:inputText id="idLevelTitleText"
+                         value="#{degreeController.aLevel.levelName}"/>
+            <h:outputLabel id="idLevelObjectivesLabel"
+                           value="Objectives (5)"/>
+            <h:inputText id="idLevelObjectivesText"
+                         value="#{degreeController.aLevel.descrip}"/>
+            <h:outputLabel id="idLevelDescLabel"
+                           value="Description"/>
+            <h:inputTextarea id="idLevelTextArea"
+                             value="#{degreeController.aLevel.descrip}"/>
+        </h:panelGrid>
+        <br/>
+        <h:commandButton id="idSaveLevelBtn" value="Save"
+                         action="#{degreeController.saveNewDegreeOrLevel('level')}"/>
+        <h:commandButton id="idCancelLevelBtn" value="Cancel"
                          action="#{degreeController.cancelNewDegree()}"/>
     </h:form>
 </f:view>

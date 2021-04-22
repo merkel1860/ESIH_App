@@ -96,7 +96,7 @@ public class Cxo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-        }finally {
+        } finally {
             try {
                 connection.close();
                 resultSet.close();
@@ -122,7 +122,7 @@ public class Cxo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-        }finally {
+        } finally {
             try {
                 connection.close();
                 resultSet.close();
@@ -152,7 +152,7 @@ public class Cxo {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 connection.close();
                 resultSet.close();
@@ -187,7 +187,7 @@ public class Cxo {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-        }finally {
+        } finally {
             try {
                 connection.close();
                 resultSet.close();
@@ -219,52 +219,58 @@ public class Cxo {
 
     }
 
-    public static boolean isInsertFeasible(Object o){
-        boolean testStatus = false;
-        if(o instanceof Degree){
+    public static PreparedStatement routineSQLBuild(String sqlString,
+                                                    Object o) throws SQLException {
+        PreparedStatement pr = null;
+        if (o instanceof Degree) {
             Degree degree = (Degree) o;
-            String sqlString = "call esihdb.isDegreeExisted(?,?)";
+            pr = connection.prepareStatement(sqlString);
+            pr.setString(1, degree.getDegreeName());
+            // TODO check out this length for a better solution
+            pr.setInt(2, degree.getLength());
+        }
+
+        return pr;
+    }
+
+    public static boolean isInsertFeasible(Object o) {
+        boolean testStatus = false;
+        if (o instanceof Degree) {
             try {
-                PreparedStatement pr = connection.prepareStatement(sqlString);
-                pr.setString(1, degree.getDegreeName());
-                pr.setInt(2, 0);
+                PreparedStatement pr = routineSQLBuild(
+                        "call esihdb.isDegreeExisted(?,?)",
+                        o);
                 resultSet = pr.executeQuery();
-                if(resultSet.next()){
-                    if(resultSet.getInt("status")==0){
+                if (resultSet.next()) {
+                    if (resultSet.getInt("status") == 0) {
                         testStatus = true;
                     }
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }finally {
-                try {
-                    connection.close();
-                    resultSet.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                    System.out.println(throwables.toString());
-                }
-
             }
-        }
+        } /*else if (o instanceof DegreeLevel) {
+            TODO ...
+        }*/
 
         return testStatus;
     }
 
     public static boolean insertData(Degree degree) {
         boolean statusInsertion = false;
-        if(isInsertFeasible(degree)){
+
+        if (isInsertFeasible(degree)) {
             try {
-                String sqlString = "call esihdb.insertDegree(?,?)";
-                PreparedStatement pr = connection.prepareStatement(sqlString);
-                pr.setString(1, degree.getDegreeName());
-                pr.setInt(2, degree.getLength());
+                PreparedStatement pr = routineSQLBuild(
+                        "call esihdb.insertDegree(?,?)",
+                        degree
+                );
                 pr.execute();
                 statusInsertion = true;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
 
-            }finally {
+            } finally {
                 try {
                     connection.close();
                     resultSet.close();
@@ -286,13 +292,13 @@ public class Cxo {
             pr.setString(1, degreeName);
 
             resultSet = pr.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 id = resultSet.getInt("PK_idDegree");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-        }finally {
+        } finally {
             try {
                 connection.close();
                 resultSet.close();
@@ -308,27 +314,22 @@ public class Cxo {
     public static List<DegreeLevel> fetchLevelListByDegree(
             String DegreeInfos) {
         List<DegreeLevel> degreeLevels = new ArrayList<>();
-        DegreeLevel  level;
+        DegreeLevel level;
         try {
-            System.out.println("Parameter :"+DegreeInfos);
             String sqlString = "call esihdb.getLevelListbyDegree(?)";
             PreparedStatement pr = connection.prepareStatement(sqlString);
             pr.setString(1, DegreeInfos);
-            System.out.println("SQL "+pr.toString());
             resultSet = pr.executeQuery();
-            System.out.println("Before getting into..."+connection.getWarnings());
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 level = new DegreeLevel();
                 level.setLevelName(
                         resultSet.getString("level_name"));
-                System.out.println("Loading :"+
-                        level.getLevelName());
                 degreeLevels.add(level);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-        }finally {
+        } finally {
             try {
                 connection.close();
                 resultSet.close();
@@ -338,7 +339,6 @@ public class Cxo {
             }
 
         }
-        System.out.println("How many level:"+degreeLevels.size());
         return degreeLevels;
     }
 }

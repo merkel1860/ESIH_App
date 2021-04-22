@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
@@ -17,7 +18,26 @@ public class DegreeController implements Serializable {
     /*
      *  We define holder for form parameters
      * */
+//listener="#{degreeController.listenerDisplay}"
+    private String testCheckBox;
 
+
+    public void listenerDisplay(AjaxBehaviorEvent event) {
+        System.out.println("Test :"+testCheckBox);
+        System.out.println("Entry :"+
+                event.getComponent().getId());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                "Updating InputField",null);
+        FacesContext.getCurrentInstance().addMessage(null,message);
+    }
+
+    public String getTestCheckBox() {
+        return testCheckBox;
+    }
+
+    public void setTestCheckBox(String testCheckBox) {
+        this.testCheckBox = testCheckBox;
+    }
 
     // degree infos
     private Long idDegree;
@@ -27,7 +47,7 @@ public class DegreeController implements Serializable {
     private List<Degree> degrees;
     private List<SelectItem> degreeList;
     private final String editColumn;
-    private boolean editable;
+    private boolean editDegree;
 
     // Degree Courses
     private Long idCourse;
@@ -40,6 +60,9 @@ public class DegreeController implements Serializable {
     private boolean editLevel;
     private List<DegreeLevel> degreeLevelList;
     private List<SelectItem> selectLevelItems;
+    private boolean levelCheckBox, editCheckBox;
+    private DegreeLevel aLevel;
+
 
     // Sub form for gathering information on new Degree
     private boolean subFormStatus = false;
@@ -47,8 +70,10 @@ public class DegreeController implements Serializable {
     // Default Constructor
     public DegreeController() {
         editColumn = "New Degree";
-        editable = false;
+        editDegree = false;
         editLevel = false;
+        levelCheckBox = false;
+        editCheckBox = false;
     }
 
     @PostConstruct
@@ -119,6 +144,7 @@ public class DegreeController implements Serializable {
             }
         } else {
             selectLevelItems.add(new SelectItem("Please enter new level"));
+            levelCheckBox = true;
         }
 
     }
@@ -190,13 +216,13 @@ public class DegreeController implements Serializable {
         return editColumn;
     }
 
-    public Boolean getEditable() {
-        return editable;
+    public Boolean getEditDegree() {
+        return editDegree;
     }
 
-    public void setEditable(Boolean editable) {
-        this.editable = editable;
-        if (editable) {
+    public void setEditDegree(Boolean editDegree) {
+        this.editDegree = editDegree;
+        if (editDegree) {
             editLevel = false;
         }
 
@@ -211,19 +237,27 @@ public class DegreeController implements Serializable {
     }
 
     // Sub Form for adding more degree program on demand
-    public void saveNewDegree() {
-        boolean statusSavingProcess = false;
-        Degree degree = new Degree(degreeTitle.toUpperCase(), degreeYears);
+    public void saveNewDegreeOrLevel(String type) {
+        boolean statusSavingProcess;
 
-        statusSavingProcess = DAO.getSingletonObjetDAO().
-                insertNewDegree(degree);
-        degree.setIdDegree(DAO.getSingletonObjetDAO().
-                retrieveDegreeID(degree.getDegreeName()));
-        DAO.getSingletonObjetDAO().getDegreeList().add(degree);
-        UpdateInterfaceMessage(statusSavingProcess, degreeTitle);
-        populateDegreeSelectItem();
-        cancelNewDegree();
-        addWillBeUpdatedComponent("degreeSelectOneMenu");
+        if(type.compareToIgnoreCase("degree") == 0){
+            Degree degree = new Degree(degreeTitle.toUpperCase(), degreeYears);
+
+            statusSavingProcess = DAO.getSingletonObjetDAO().
+                    insertNewDegree(degree);
+            degree.setIdDegree(DAO.getSingletonObjetDAO().
+                    retrieveDegreeID(degree.getDegreeName()));
+            DAO.getSingletonObjetDAO().getDegreeList().add(degree);
+            UpdateInterfaceMessage(statusSavingProcess, degreeTitle);
+            populateDegreeSelectItem();
+            cancelNewDegree();
+            addWillBeUpdatedComponent("degreeSelectOneMenu");
+        }else {
+            if (type.compareToIgnoreCase("level") == 0){
+//                statusSavingProcess = DAO.getSingletonObjetDAO().
+            }
+        }
+
 
     }
 
@@ -262,7 +296,7 @@ public class DegreeController implements Serializable {
     public void cancelNewDegree() {
         degreeTitle = "";
         degreeYears = 0;
-        editable = false;
+        editDegree = false;
     }
 
     public String getSelectedLevel() {
@@ -284,10 +318,7 @@ public class DegreeController implements Serializable {
                 fetchlevelsByDegree(selectedDegreeInfos);
         populateLevelSelectItem();
         editLevel = true;
-        //TODO addWillBeUpdatedComponent()
-        System.out.println(changeEvent.
-                getNewValue().toString().
-                substring(0,changeEvent.getNewValue().toString().indexOf(":")-1));
+
     }
 
     public Boolean getEditLevel() {
@@ -297,6 +328,31 @@ public class DegreeController implements Serializable {
     public void setEditLevel(boolean editLevel) {
         this.editLevel = editLevel;
     }
+
+    public boolean isLevelCheckBox() {
+        return levelCheckBox;
+    }
+
+    public void setLevelCheckBox(boolean levelCheckBox) {
+        this.levelCheckBox = levelCheckBox;
+    }
+
+    public boolean isEditCheckBox() {
+        return editCheckBox;
+    }
+
+    public void setEditCheckBox(boolean editCheckBox) {
+        this.editCheckBox = editCheckBox;
+    }
+
+    public DegreeLevel getaLevel() {
+        return aLevel;
+    }
+
+    public void setaLevel(DegreeLevel aLevel) {
+        this.aLevel = aLevel;
+    }
+
     /*
      * */
 
