@@ -7,7 +7,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>Title</title>
+    <h:outputStylesheet  name="style.css" library="css"/>
 </h:head>
 <h:body>
     <f:view>
@@ -15,12 +15,16 @@
             <h:messages errorStyle="color: red" infoStyle="color: green" globalOnly="true" />
         <h:panelGrid columns="5" cellspacing="20">
             <h:outputLink id="studentEnrollMenu"
+                          styleClass="topnav"
                      value="student_enroll.xhtml">Enrollment</h:outputLink>
             <h:outputLink id="studentAddingCourseMenu"
-                     value="adding_materials.xhtml">Adding Materials</h:outputLink>
+                          styleClass="topnav"
+                          value="adding_materials.xhtml">Adding Materials</h:outputLink>
             <h:outputLink id="AddingCourseMenu"
+                          styleClass="topnav"
                      value="adding_course.xhtml">Adding Course</h:outputLink>
             <h:outputLink id="AddingDegreeMenu"
+                          styleClass="topnav"
                           value="adding_degree.xhtml">Adding Degree</h:outputLink>
             <h:commandButton value="Load App Data"
                              action="#{introController.init}" />

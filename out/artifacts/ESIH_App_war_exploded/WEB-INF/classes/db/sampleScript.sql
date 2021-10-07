@@ -251,3 +251,50 @@ begin
     end if ;
     return status;
 end //
+
+# Creating a procedure that insert new Level  based on degree title (No Script)
+delimiter //
+create
+    definer = nebel@localhost procedure insertLevel(IN leveName varchar(250),
+                                                    IN obj varchar(250), in descrip varchar(250), in degreeName varchar(250))
+begin
+    declare status int default 1;
+    declare fk_level, fk_degree int default 0;
+    if(isLevelExisted(leveName,0) = 0) then
+        insert into Level(level_name, description, objectifs)
+            value (leveName, descrip, obj);
+
+        set fk_level = getLevelIDByTitle(leveName);
+        set fk_degree = getDegreeIDByTitle(degreeName);
+
+        insert into Degree_Level(FK_idDegree, FK_idLevel)
+            value(fk_degree, fk_level);
+
+        set status = 0;
+    else select status;
+    end if ;
+end;
+
+# Creating a function that returns Level id based on level title (No Script)
+delimiter //
+create function getLevelIDByTitle(name varchar(250))
+    returns int
+begin
+    declare id int default 0;
+    select PK_idLevel into id from Level l
+    where l.level_name = name;
+    return id;
+end //
+
+
+# Creating a function that returns Degree id based on level title (No Script)
+delimiter //
+create function getDegreeIDByTitle(name varchar(250))
+    returns int
+begin
+    declare id int default 0;
+    select PK_idDegree into id from Degree d
+    where d.degree_name = name;
+    return id;
+end //
+

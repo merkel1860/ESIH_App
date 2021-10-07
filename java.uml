@@ -1,301 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>java</OriginalElement>
+  <OriginalElement>core</OriginalElement>
   <nodes>
-    <node x="1196.590909090909" y="770.0">java.rmi</node>
-    <node x="476.590909090909" y="770.0">java.sql</node>
-    <node x="184.590909090909" y="875.0">java.applet</node>
-    <node x="527.090909090909" y="360.0">java.security</node>
-    <node x="386.48376623376623" y="195.0">java.util</node>
-    <node x="369.04428964635645" y="1000.0">java.beans</node>
-    <node x="336.590909090909" y="770.0">java.nio</node>
-    <node x="1336.590909090909" y="770.0">java.model</node>
-    <node x="196.590909090909" y="770.0">java.awt</node>
-    <node x="543.090909090909" y="525.0">java.lang</node>
-    <node x="48.59090909090901" y="770.0">java.text</node>
-    <node x="760.590909090909" y="770.0">java.time</node>
-    <node x="1056.590909090909" y="770.0">java.net</node>
-    <node x="664.4480519480519" y="0.0">java.io</node>
-    <node x="908.590909090909" y="770.0">java.math</node>
-    <node x="628.590909090909" y="770.0">java.Playbook</node>
+    <node x="1130.8645833333333" y="1460.0">core.IntroController</node>
+    <node x="402.4270833333332" y="78.5">core.Homework</node>
+    <node x="255.7476446544523" y="290.0">core.Person</node>
+    <node x="-176.9175535614911" y="100.17863105175292">core.Playbook</node>
+    <node x="574.4270833333333" y="78.5">core.Examen</node>
+    <node x="1168.1145833333333" y="357.0">core.DegreeLevel</node>
+    <node x="420.65095953153957" y="1071.0">core.CourseLevel</node>
+    <node x="498.61458333333314" y="2048.5">core.MaterialsController</node>
+    <node x="207.15095953153957" y="658.0">core.Student</node>
+    <node x="814.1145833333333" y="301.0">core.CourseEnrollController</node>
+    <node x="91.7476446544523" y="379.0">core.Address</node>
+    <node x="756.9247279877856" y="0.0">core.Course</node>
+    <node x="540.6747279877856" y="356.5">core.Materials</node>
+    <node x="998.6857026901665" y="1127.5">core.utils</node>
+    <node x="640.1145833333333" y="1327.0">core.DAO</node>
+    <node x="1225.3645833333333" y="724.0">core.Degree</node>
+    <node x="1218.3645833333333" y="1751.0">core.DegreeController</node>
+    <node x="0.0" y="2004.0">core.StudentEnrollController</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="java.io" target="java.lang">
-      <point x="-12.727272727272748" y="27.5" />
-      <point x="707.7207792207791" y="155.0" />
-      <point x="697.590909090909" y="155.0" />
-      <point x="697.590909090909" y="465.0" />
-      <point x="629.9480519480519" y="465.0" />
-      <point x="22.85714285714289" y="-27.5" />
+    <edge source="core.Materials" target="core.Course">
+      <point x="26.875" y="-77.5" />
+      <point x="675.0497279877856" y="240.0" />
+      <point x="773.4247279877856" y="240.0" />
+      <point x="-82.5" y="110.0" />
     </edge>
-    <edge source="java.security" target="java.util">
-      <point x="-45.714285714285666" y="-27.5" />
-      <point x="561.3766233766233" y="280.0" />
-      <point x="502.48376623376623" y="280.0" />
-      <point x="52.0" y="27.5" />
+    <edge source="core.Degree" target="core.DegreeLevel">
+      <point x="49.0" y="-110.5" />
+      <point x="1372.3645833333333" y="628.0" />
+      <point x="1275.5520833333333" y="628.0" />
+      <point x="11.9375" y="77.0" />
     </edge>
-    <edge source="java.awt" target="java.lang">
-      <point x="34.28571428571422" y="-27.5" />
-      <point x="290.87662337662323" y="690.0" />
-      <point x="568.1343873517785" y="690.0" />
-      <point x="-38.956521739130494" y="27.5" />
+    <edge source="core.DAO" target="core.DegreeLevel">
+      <point x="29.727272727272748" y="-177.0" />
+      <point x="833.341856060606" y="1267.0" />
+      <point x="988.1857026901665" y="1267.0" />
+      <point x="988.1857026901665" y="618.0" />
+      <point x="1180.0520833333333" y="618.0" />
+      <point x="-83.5625" y="77.0" />
     </edge>
-    <edge source="java.awt" target="java.io">
-      <point x="-51.42857142857133" y="-27.5" />
-      <point x="205.16233766233768" y="640.0" />
-      <point x="5.090909090909008" y="640.0" />
-      <point x="5.090909090909008" y="85.0" />
-      <point x="672.0844155844154" y="85.0" />
-      <point x="-48.363636363636374" y="27.5" />
+    <edge source="core.DAO" target="core.CourseLevel">
+      <point x="-89.18181818181813" y="-177.0" />
+      <point x="714.432765151515" y="1287.0" />
+      <point x="545.6509595315396" y="1287.0" />
+      <point x="0.0" y="88.0" />
     </edge>
-    <edge source="java.text" target="java.util">
-      <point x="-25.600000000000023" y="-27.5" />
-      <point x="86.9909090909091" y="310.0" />
-      <point x="414.48376623376623" y="310.0" />
-      <point x="-36.0" y="27.5" />
+    <edge source="core.Materials" target="core.Homework">
+      <point x="-80.625" y="-77.5" />
+      <point x="567.5497279877856" y="270.0" />
+      <point x="478.4270833333332" y="270.0" />
+      <point x="0.0" y="31.5" />
     </edge>
-    <edge source="java.time" target="java.io">
-      <point x="42.66666666666663" y="-27.5" />
-      <point x="867.2575757575756" y="740.0" />
-      <point x="1105.3045168492004" y="740.0" />
-      <point x="1105.3045168492004" y="155.0" />
-      <point x="733.1753246753246" y="155.0" />
-      <point x="12.727272727272748" y="27.5" />
+    <edge source="core.utils" target="core.DAO">
+      <point x="0.0" y="31.5" />
+      <point x="1099.1857026901666" y="1287.0" />
+      <point x="892.7964015151513" y="1287.0" />
+      <point x="89.18181818181813" y="-177.0" />
     </edge>
-    <edge source="java.net" target="java.io">
-      <point x="24.0" y="-27.5" />
-      <point x="1140.590909090909" y="750.0" />
-      <point x="1145.681818181818" y="750.0" />
-      <point x="1145.681818181818" y="135.0" />
-      <point x="743.3571428571429" y="135.0" />
-      <point x="22.90909090909099" y="27.5" />
+    <edge source="core.utils" target="core.Degree">
+      <point x="83.75" y="-31.5" />
+      <point x="1182.9357026901666" y="1041.0" />
+      <point x="1267.3645833333333" y="1041.0" />
+      <point x="-56.0" y="110.5" />
     </edge>
-    <edge source="java.util" target="java.security">
-      <point x="60.0" y="27.5" />
-      <point x="510.48376623376623" y="270.0" />
-      <point x="584.2337662337662" y="270.0" />
-      <point x="-22.857142857142776" y="-27.5" />
+    <edge source="core.Materials" target="core.Examen">
+      <point x="-26.875" y="-77.5" />
+      <point x="621.2997279877856" y="270.0" />
+      <point x="637.4270833333333" y="270.0" />
+      <point x="0.0" y="31.5" />
     </edge>
-    <edge source="java.math" target="java.io">
-      <point x="42.666666666666686" y="-27.5" />
-      <point x="1015.2575757575758" y="750.0" />
-      <point x="1110.3954259401094" y="750.0" />
-      <point x="1110.3954259401094" y="145.0" />
-      <point x="738.2662337662337" y="145.0" />
-      <point x="17.81818181818187" y="27.5" />
+    <edge source="core.Student" target="core.Materials">
+      <point x="98.75" y="-176.5" />
+      <point x="503.40095953153957" y="628.0" />
+      <point x="594.4247279877856" y="628.0" />
+      <point x="-53.75" y="77.5" />
     </edge>
-    <edge source="java.awt" target="java.util">
-      <point x="-17.14285714285711" y="-27.5" />
-      <point x="239.4480519480519" y="620.0" />
-      <point x="177.75455905839056" y="620.0" />
-      <point x="177.75455905839056" y="330.0" />
-      <point x="430.48376623376623" y="330.0" />
-      <point x="-20.0" y="27.5" />
+    <edge source="core.DAO" target="core.Student">
+      <point x="-148.63636363636363" y="-177.0" />
+      <point x="654.9782196969695" y="1307.0" />
+      <point x="399.15095953153957" y="1307.0" />
+      <point x="399.15095953153957" y="1041.0" />
+      <point x="379.96345953153957" y="1041.0" />
+      <point x="-24.6875" y="176.5" />
     </edge>
-    <edge source="java.nio" target="java.util">
-      <point x="-40.0" y="-27.5" />
-      <point x="356.590909090909" y="600.0" />
-      <point x="203.1244424753039" y="600.0" />
-      <point x="203.1244424753039" y="340.0" />
-      <point x="438.48376623376623" y="340.0" />
-      <point x="-12.0" y="27.5" />
+    <edge source="core.IntroController" target="core.utils">
+      <point x="0.0" y="-44.0" />
+      <point x="1252.3645833333333" y="1287.0" />
+      <point x="1166.1857026901666" y="1287.0" />
+      <point x="67.0" y="31.5" />
     </edge>
-    <edge source="java.sql" target="java.util">
-      <point x="-48.0" y="-27.5" />
-      <point x="488.590909090909" y="640.0" />
-      <point x="446.48376623376623" y="640.0" />
-      <point x="-4.0" y="27.5" />
+    <edge source="core.utils" target="core.Student">
+      <point x="-83.75" y="-31.5" />
+      <point x="1015.4357026901665" y="1041.0" />
+      <point x="528.0884595315396" y="1041.0" />
+      <point x="123.4375" y="176.5" />
     </edge>
-    <edge source="java.security" target="java.lang">
-      <point x="45.714285714285666" y="27.5" />
-      <point x="652.8051948051947" y="455.0" />
-      <point x="620.8051948051948" y="455.0" />
-      <point x="13.71428571428578" y="-27.5" />
+    <edge source="core.StudentEnrollController" target="core.Address">
+      <point x="-142.875" y="-166.0" />
+      <point x="47.625" y="1731.0" />
+      <point x="125.51734017470619" y="1731.0" />
+      <point x="125.51734017470619" y="638.0" />
+      <point x="115.7476446544523" y="638.0" />
+      <point x="-48.0" y="55.0" />
     </edge>
-    <edge source="java.text" target="java.lang">
-      <point x="0.0" y="-27.5" />
-      <point x="112.59090909090901" y="650.0" />
-      <point x="545.8735177865611" y="650.0" />
-      <point x="-61.21739130434787" y="27.5" />
+    <edge source="core.MaterialsController" target="core.Student">
+      <point x="-73.75" y="-121.5" />
+      <point x="572.3645833333331" y="1721.0" />
+      <point x="380.9691413497213" y="1721.0" />
+      <point x="380.9691413497213" y="1051.0" />
+      <point x="330.58845953153957" y="1051.0" />
+      <point x="-74.0625" y="176.5" />
     </edge>
-    <edge source="java.net" target="java.lang">
-      <point x="-48.0" y="-27.5" />
-      <point x="1068.590909090909" y="690.0" />
-      <point x="646.0474308300394" y="690.0" />
-      <point x="38.95652173913038" y="27.5" />
+    <edge source="core.MaterialsController" target="core.DAO">
+      <point x="73.75" y="-121.5" />
+      <point x="719.8645833333331" y="1731.0" />
+      <point x="803.6145833333333" y="1731.0" />
+      <point x="0.0" y="177.0" />
     </edge>
-    <edge source="java.security" target="java.io">
-      <point x="0.0" y="-27.5" />
-      <point x="607.090909090909" y="340.0" />
-      <point x="624.8766233766232" y="340.0" />
-      <point x="624.8766233766232" y="115.0" />
-      <point x="687.3571428571427" y="115.0" />
-      <point x="-33.09090909090912" y="27.5" />
+    <edge source="core.Student" target="core.Person">
+      <point x="32.91666666666663" y="-176.5" />
+      <point x="437.5676261982062" y="638.0" />
+      <point x="435.7476446544523" y="638.0" />
+      <point x="60.0" y="144.0" />
     </edge>
-    <edge source="java.util" target="java.lang">
-      <point x="28.0" y="27.5" />
-      <point x="478.48376623376623" y="310.0" />
-      <point x="507.4480519480519" y="310.0" />
-      <point x="507.4480519480519" y="455.0" />
-      <point x="575.090909090909" y="455.0" />
-      <point x="-32.0" y="-27.5" />
+    <edge source="core.DegreeController" target="core.Degree">
+      <point x="0.0" y="-419.0" />
+      <point x="1406.3645833333333" y="1721.0" />
+      <point x="1462.7199916898576" y="1721.0" />
+      <point x="1462.7199916898576" y="1031.0" />
+      <point x="1407.3645833333333" y="1031.0" />
+      <point x="84.00000000000006" y="110.5" />
     </edge>
-    <edge source="java.rmi" target="java.io">
-      <point x="15.0" y="-27.5" />
-      <point x="1271.590909090909" y="750.0" />
-      <point x="1281.090909090909" y="750.0" />
-      <point x="1281.090909090909" y="115.0" />
-      <point x="753.5389610389609" y="115.0" />
-      <point x="33.09090909090912" y="27.5" />
+    <edge source="core.DAO" target="core.Course">
+      <point x="0.0" y="-177.0" />
+      <point x="803.6145833333333" y="270.0" />
+      <point x="872.4247279877856" y="270.0" />
+      <point x="16.5" y="110.0" />
     </edge>
-    <edge source="java.Playbook" target="java.lang">
-      <point x="0.0" y="-27.5" />
-      <point x="684.590909090909" y="740.0" />
-      <point x="618.2213438735176" y="740.0" />
-      <point x="11.130434782608631" y="27.5" />
+    <edge source="core.DAO" target="core.utils">
+      <point x="59.45454545454538" y="-177.0" />
+      <point x="863.0691287878785" y="1277.0" />
+      <point x="1032.1857026901666" y="1277.0" />
+      <point x="-67.0" y="31.5" />
     </edge>
-    <edge source="java.beans" target="java.lang">
-      <point x="8.5" y="-27.5" />
-      <point x="445.54428964635645" y="950.0" />
-      <point x="607.090909090909" y="950.0" />
-      <point x="0.0" y="27.5" />
+    <edge source="core.Student" target="core.Address">
+      <point x="-98.75" y="-176.5" />
+      <point x="305.90095953153957" y="628.0" />
+      <point x="211.7476446544523" y="628.0" />
+      <point x="48.0" y="55.0" />
     </edge>
-    <edge source="java.applet" target="java.awt">
-      <point x="0.0" y="-27.5" />
-      <point x="0.0" y="27.5" />
+    <edge source="core.StudentEnrollController" target="core.Student">
+      <point x="-47.625" y="-166.0" />
+      <point x="142.875" y="1731.0" />
+      <point x="185.0" y="1731.0" />
+      <point x="185.0" y="1041.0" />
+      <point x="231.83845953153957" y="1041.0" />
+      <point x="-172.8125" y="176.5" />
     </edge>
-    <edge source="java.nio" target="java.lang">
-      <point x="40.0" y="-27.5" />
-      <point x="436.590909090909" y="720.0" />
-      <point x="584.8300395256916" y="720.0" />
-      <point x="-22.260869565217376" y="27.5" />
+    <edge source="core.DegreeController" target="core.DegreeLevel">
+      <point x="161.1428571428571" y="-419.0" />
+      <point x="1567.5074404761904" y="1721.0" />
+      <point x="1503.4699916898576" y="1721.0" />
+      <point x="1503.4699916898576" y="598.0" />
+      <point x="1347.1770833333333" y="598.0" />
+      <point x="83.5625" y="77.0" />
     </edge>
-    <edge source="java.beans" target="java.io">
-      <point x="59.5" y="-27.5" />
-      <point x="496.54428964635645" y="980.0" />
-      <point x="1494.090909090909" y="980.0" />
-      <point x="1494.090909090909" y="75.0" />
-      <point x="773.9025974025974" y="75.0" />
-      <point x="53.454545454545496" y="27.5" />
+    <edge source="core.utils" target="core.DegreeLevel">
+      <point x="-16.75" y="-31.5" />
+      <point x="1082.4357026901666" y="1051.0" />
+      <point x="1093.6857026901666" y="1051.0" />
+      <point x="1093.6857026901666" y="628.0" />
+      <point x="1203.9270833333333" y="628.0" />
+      <point x="-59.6875" y="77.0" />
     </edge>
-    <edge source="java.model" target="java.io">
-      <point x="34.0" y="-27.5" />
-      <point x="1438.590909090909" y="95.0" />
-      <point x="763.7207792207791" y="95.0" />
-      <point x="43.27272727272725" y="27.5" />
+    <edge source="core.CourseEnrollController" target="core.Course">
+      <point x="-83.5" y="-133.0" />
+      <point x="897.6145833333333" y="270.0" />
+      <point x="905.4247279877856" y="270.0" />
+      <point x="49.5" y="110.0" />
     </edge>
-    <edge source="java.model" target="java.lang">
-      <point x="-34.0" y="-27.5" />
-      <point x="1370.590909090909" y="640.0" />
-      <point x="668.3083003952568" y="640.0" />
-      <point x="61.21739130434776" y="27.5" />
+    <edge source="core.DAO" target="core.Degree">
+      <point x="118.90909090909088" y="-177.0" />
+      <point x="922.523674242424" y="1297.0" />
+      <point x="1243.1857026901666" y="1297.0" />
+      <point x="1243.1857026901666" y="1051.0" />
+      <point x="1295.3645833333333" y="1051.0" />
+      <point x="-28.0" y="110.5" />
     </edge>
-    <edge source="java.awt" target="java.security">
-      <point x="0.0" y="-27.5" />
-      <point x="256.590909090909" y="610.0" />
-      <point x="214.1244424753039" y="610.0" />
-      <point x="214.1244424753039" y="495.0" />
-      <point x="538.5194805194805" y="495.0" />
-      <point x="-68.57142857142856" y="27.5" />
+    <edge source="core.DegreeController" target="core.DAO">
+      <point x="-161.1428571428571" y="-419.0" />
+      <point x="1245.2217261904761" y="1731.0" />
+      <point x="912.6145833333333" y="1731.0" />
+      <point x="109.0" y="177.0" />
     </edge>
-    <edge source="java.sql" target="java.lang">
-      <point x="48.0" y="-27.5" />
-      <point x="584.590909090909" y="750.0" />
-      <point x="601.5256916996046" y="750.0" />
-      <point x="-5.5652173913043725" y="27.5" />
-    </edge>
-    <edge source="java.rmi" target="java.lang">
-      <point x="-15.0" y="-27.5" />
-      <point x="1241.590909090909" y="650.0" />
-      <point x="662.7430830039524" y="650.0" />
-      <point x="55.652173913043384" y="27.5" />
-    </edge>
-    <edge source="java.text" target="java.io">
-      <point x="-51.200000000000045" y="-27.5" />
-      <point x="61.39090909090896" y="750.0" />
-      <point x="0.0" y="750.0" />
-      <point x="0.0" y="75.0" />
-      <point x="666.9935064935064" y="75.0" />
-      <point x="-53.454545454545496" y="27.5" />
-    </edge>
-    <edge source="java.net" target="java.security">
-      <point x="0.0" y="-27.5" />
-      <point x="1116.590909090909" y="670.0" />
-      <point x="1035.440880485564" y="670.0" />
-      <point x="1035.440880485564" y="455.0" />
-      <point x="675.6623376623376" y="455.0" />
-      <point x="68.57142857142856" y="27.5" />
-    </edge>
-    <edge source="java.util" target="java.io">
-      <point x="-32.0" y="-27.5" />
-      <point x="418.48376623376623" y="95.0" />
-      <point x="677.1753246753246" y="95.0" />
-      <point x="-43.27272727272725" y="27.5" />
-    </edge>
-    <edge source="java.beans" target="java.applet">
-      <point x="-8.5" y="-27.5" />
-      <point x="428.54428964635645" y="950.0" />
-      <point x="256.590909090909" y="950.0" />
-      <point x="0.0" y="27.5" />
-    </edge>
-    <edge source="java.beans" target="java.util">
-      <point x="-42.5" y="-27.5" />
-      <point x="394.54428964635645" y="970.0" />
-      <point x="27.09090909090901" y="970.0" />
-      <point x="27.09090909090901" y="290.0" />
-      <point x="398.48376623376623" y="290.0" />
-      <point x="-52.0" y="27.5" />
-    </edge>
-    <edge source="java.sql" target="java.security">
-      <point x="-24.0" y="-27.5" />
-      <point x="512.590909090909" y="640.0" />
-      <point x="506.090909090909" y="640.0" />
-      <point x="506.090909090909" y="505.0" />
-      <point x="561.3766233766232" y="505.0" />
-      <point x="-45.71428571428578" y="27.5" />
-    </edge>
-    <edge source="java.math" target="java.lang">
-      <point x="0.0" y="-27.5" />
-      <point x="972.590909090909" y="700.0" />
-      <point x="640.482213438735" y="700.0" />
-      <point x="33.39130434782601" y="27.5" />
-    </edge>
-    <edge source="java.io" target="java.security">
-      <point x="-28.0" y="27.5" />
-      <point x="692.4480519480519" y="125.0" />
-      <point x="635.8766233766232" y="125.0" />
-      <point x="635.8766233766232" y="340.0" />
-      <point x="629.9480519480519" y="340.0" />
-      <point x="22.85714285714289" y="-27.5" />
-    </edge>
-    <edge source="java.time" target="java.lang">
-      <point x="-42.66666666666663" y="-27.5" />
-      <point x="781.9242424242424" y="730.0" />
-      <point x="623.786561264822" y="730.0" />
-      <point x="16.695652173913004" y="27.5" />
-    </edge>
-    <edge source="java.lang" target="java.io">
-      <point x="41.14285714285711" y="-27.5" />
-      <point x="648.2337662337661" y="485.0" />
-      <point x="715.8766233766232" y="485.0" />
-      <point x="715.8766233766232" y="175.0" />
-      <point x="717.9025974025974" y="175.0" />
-      <point x="-2.545454545454504" y="27.5" />
-    </edge>
-    <edge source="java.lang" target="java.security">
-      <point x="-13.714285714285666" y="-27.5" />
-      <point x="593.3766233766233" y="435.0" />
-      <point x="584.2337662337661" y="435.0" />
-      <point x="-22.85714285714289" y="27.5" />
+    <edge source="core.StudentEnrollController" target="core.DAO">
+      <point x="142.875" y="-166.0" />
+      <point x="333.375" y="1731.0" />
+      <point x="694.6145833333333" y="1731.0" />
+      <point x="-109.0" y="177.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.41209302325581393" x="747.5" y="527.5" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="709.0000000000005" y="1294.5" />
   <SelectedNodes>
-    <node>java.Playbook</node>
+    <node>core.IntroController</node>
   </SelectedNodes>
-  <Categories />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>

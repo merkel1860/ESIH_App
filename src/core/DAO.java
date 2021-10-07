@@ -2,6 +2,7 @@ package core;
 
 import core.utils.Cxo;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -91,6 +92,14 @@ public class DAO implements Serializable {
         return statusInsertion;
     }
 
+    // Insertion of new Level
+    public boolean insertNewLevel(DegreeLevel degreeLevel) {
+        boolean statusInsertion = false;
+        Cxo.initConnection();
+        statusInsertion = Cxo.insertData(degreeLevel);
+        return statusInsertion;
+    }
+
     public int retrieveDegreeID(String degreeName) {
         Cxo.initConnection();
         return Cxo.fetchDegreeInfo(degreeName);
@@ -101,4 +110,14 @@ public class DAO implements Serializable {
         return Cxo.fetchLevelListByDegree(selectedDegreeInfos);
 
     }
+
+    public String isLevelBelongsToDegree(DegreeLevel degreeLevel){
+        for(Degree degree : degreeList){
+            degree.getLevelList().contains(degreeLevel);
+            return degree.getDegreeName();
+        }
+        return "none";
+    }
+
+
 }

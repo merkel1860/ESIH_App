@@ -5,10 +5,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <h:outputStylesheet  name="style.css" library="css"/>
+</h:head>
    <f:view>
       <h:outputLabel value="Hello, Nebel"/>
       <br />
       <h:outputLink id="introLink"
-                    value = "view/intro.xhtml" >Main Menu</h:outputLink>
+                    value = "view/intro.xhtml" >
+         Main Menu</h:outputLink>
    </f:view>
 </html>

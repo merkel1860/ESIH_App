@@ -1,15 +1,22 @@
 package core;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.util.TypeLiteral;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Named(value = "degreeController")
@@ -18,26 +25,6 @@ public class DegreeController implements Serializable {
     /*
      *  We define holder for form parameters
      * */
-//listener="#{degreeController.listenerDisplay}"
-    private String testCheckBox;
-
-
-    public void listenerDisplay(AjaxBehaviorEvent event) {
-        System.out.println("Test :"+testCheckBox);
-        System.out.println("Entry :"+
-                event.getComponent().getId());
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                "Updating InputField",null);
-        FacesContext.getCurrentInstance().addMessage(null,message);
-    }
-
-    public String getTestCheckBox() {
-        return testCheckBox;
-    }
-
-    public void setTestCheckBox(String testCheckBox) {
-        this.testCheckBox = testCheckBox;
-    }
 
     // degree infos
     private Long idDegree;
@@ -61,7 +48,19 @@ public class DegreeController implements Serializable {
     private List<DegreeLevel> degreeLevelList;
     private List<SelectItem> selectLevelItems;
     private boolean levelCheckBox, editCheckBox;
-    private DegreeLevel aLevel;
+
+    @Inject
+    private DegreeLevel aLevel ;
+
+    public DegreeLevel getaLevel() {
+        return aLevel;
+    }
+
+    public void setaLevel(DegreeLevel aLevel) {
+        this.aLevel = aLevel;
+    }
+//    private DegreeLevel aLevel;
+
 
 
     // Sub form for gathering information on new Degree
@@ -74,6 +73,7 @@ public class DegreeController implements Serializable {
         editLevel = false;
         levelCheckBox = false;
         editCheckBox = false;
+        aLevel = new DegreeLevel();
     }
 
     @PostConstruct
@@ -254,7 +254,17 @@ public class DegreeController implements Serializable {
             addWillBeUpdatedComponent("degreeSelectOneMenu");
         }else {
             if (type.compareToIgnoreCase("level") == 0){
-//                statusSavingProcess = DAO.getSingletonObjetDAO().
+                DegreeLevel degreeLevel = new DegreeLevel();
+                degreeLevel.setLevelName(aLevel.getLevelName().toUpperCase());
+                degreeLevel.setDescrip(aLevel.getDescrip().toUpperCase());
+                degreeLevel.setObjectives(aLevel.getObjectives().toUpperCase());
+                statusSavingProcess = DAO.getSingletonObjetDAO().insertNewLevel(degreeLevel);
+                UpdateInterfaceMessage(statusSavingProcess, degreeLevel.getLevelName());
+                populateLevelSelectItem();
+                // TODO get component by id is better than hard coding it.
+//                addWillBeUpdatedComponent(FacesContext.getCurrentInstance().getExternalContext().);
+
+
             }
         }
 
@@ -345,14 +355,14 @@ public class DegreeController implements Serializable {
         this.editCheckBox = editCheckBox;
     }
 
-    public DegreeLevel getaLevel() {
+    /*public DegreeLevel getaLevel() {
         return aLevel;
     }
 
     public void setaLevel(DegreeLevel aLevel) {
         this.aLevel = aLevel;
     }
-
+*/
     /*
      * */
 

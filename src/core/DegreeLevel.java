@@ -1,9 +1,15 @@
 package core;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
+import java.io.Serializable;
 
-public class DegreeLevel  {
+@Named
+@SessionScoped
+
+public class DegreeLevel  implements Serializable {
     private String levelName;
     private int idLevel;
     private String descrip;
